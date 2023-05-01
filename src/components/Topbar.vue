@@ -198,6 +198,5 @@
   </script>
   
   <style scoped>
-  /* Estilos CSS específicos*/
   </style>
   
