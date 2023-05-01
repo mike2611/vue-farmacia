@@ -1,10 +1,10 @@
 <template>
   <div id="page-top">
     <div id="wrapper">
+      <SideBar />
       <div id="content-wrapper" class="d-flex flex-column">
         <div id="content">
-            <SideBar />
-            <TopBar />
+         <TopBar />
           <div class="container-fluid">
                             <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
