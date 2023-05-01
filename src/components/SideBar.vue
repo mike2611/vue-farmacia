@@ -81,7 +81,7 @@
 
 <script>
 export default {
-  name: "Sidebar",
+  name: "SideBar",
 };
 </script>
 

@@ -1,10 +1,10 @@
 <template>
   <div id="page-top">
     <div id="wrapper">
-      <Sidebar />
       <div id="content-wrapper" class="d-flex flex-column">
         <div id="content">
-          <Topbar />
+            <SideBar />
+            <TopBar />
           <div class="container-fluid">
                             <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -200,7 +200,7 @@
                     </div>
           </div>
         </div>
-        <Footer />
+        <CustomFooter />
       </div>
     </div>
     <a class="scroll-to-top rounded" href="#page-top">
@@ -210,15 +210,15 @@
 </template>
 
 <script>
-import Sidebar from "./Sidebar.vue";
-import Topbar from "./TopBar.vue";
-import Footer from "./Footer.vue";
+import SideBar from "./SideBar.vue";
+import TopBar from "./TopBar.vue";
+import CustomFooter from "./CustomFooter.vue";
 
 export default {
   components: {
-    Sidebar,
-    Topbar,
-    Footer
+    SideBar,
+    TopBar,
+    CustomFooter
   }
 };
 </script>
