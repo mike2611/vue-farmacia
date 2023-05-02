@@ -13,11 +13,11 @@
                     <div class="d-flex justify-content-center">
 
                         <!-- Page Heading -->
-                        <div class="center-top">
+                        <div class="center-top mt-4">
                             <div class="d-flex justify-content-center" style="width: 15vw;">
                                 <h1 class="h3 mb-1 text-gray-800 m-2"> <b class="blue-color">F</b>arma<b class="blue-color">F</b>ácil</h1> 
                                 <div>
-                                    <img src="../assets/img/farmaLogo6.png" alt="Logo Farmacia" width="50%">
+                                    <img src="../assets/img/farmaLogo6.png" alt="Logo Farmacia" width="40%">
                                 </div>
                             </div>
                         </div>
