@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="waves">
         <div>
             <!-- Content Wrapper -->
             <div id="content-wrapper" class="d-flex flex-column">
