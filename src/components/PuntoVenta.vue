@@ -1,16 +1,15 @@
 <template>
-    <div class="waves">
+    <div>
         <div>
             <!-- Content Wrapper -->
             <div id="content-wrapper" class="d-flex flex-column">
 
+
                 <!-- Main Content -->
                 <div id="content">
 
-                    <TopBar/>
-            
                     <!-- Begin Page Content -->
-                    <div class="d-flex justify-content-center">
+                    <div class="d-flex justify-content-center container-fluid">
 
                         <!-- Page Heading -->
                         <div class="center-top mt-4">
@@ -235,14 +234,12 @@
   </template>
   
   <script>
-  import TopBar from "./TopBar.vue";
-  import CustomFooter from "./CustomFooter.vue";
+
+
 
   export default {
     name: 'PuntoVenta',
     components: {
-    TopBar,
-    CustomFooter
   }
   };
   </script>
@@ -256,14 +253,6 @@
             color: black;
         }
 
-        .waves {
-            aspect-ratio: 900/600;
-            width: 100%;
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: cover;
-            background-image: url('../assets/img/waves6.svg');
-        }
 
         .center-top {
             position: absolute;
