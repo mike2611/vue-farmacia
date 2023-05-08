@@ -214,49 +214,22 @@
     </div>
 </template>
   
-<<<<<<< HEAD
-  <script>
-
-
-=======
 <script>
 //   import TopBar from "./TopBar.vue";
 //   import CustomFooter from "./CustomFooter.vue";
->>>>>>> provConst
 
   export default {
     name: 'PuntoVenta',
     components: {
-<<<<<<< HEAD
-  }
-=======
         // TopBar,
         // CustomFooter
     }
->>>>>>> provConst
   };
 </script>
   
 <style scoped>
     .blue-color {
         color: #3eb9c0;
-<<<<<<< HEAD
-        }
-
-        .black-color {
-            color: black;
-        }
-
-
-        .center-top {
-            position: absolute;
-            top: 8%;
-            left: 49%;
-            transform: translateX(-50%);
-        }
-
-  </style>
-=======
     }
     .black-color {
         color: black;
@@ -278,5 +251,4 @@
         transform: translateX(-50%);
     }
 </style>
->>>>>>> provConst
   
