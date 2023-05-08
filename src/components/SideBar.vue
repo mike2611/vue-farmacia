@@ -55,10 +55,11 @@
             <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <!-- <h6 class="collapse-header">Custom Utilities:</h6> -->
-                    <a class="collapse-item" href="utilities-border.html">
+                    <!-- <a class="collapse-item" href="utilities-border.html">
                         <router-link to="/puntoVenta">Punto de Venta</router-link>
-                    </a>
-                    <a class="collapse-item" href="utilities-border.html">Historial de Ventas</a>
+                    </a> -->
+                    <a class="collapse-item" href="#" @click="pruebaTemplate(5)">Punto de Venta</a>
+                    <a class="collapse-item" href="#" @click="pruebaTemplate(0)">Historial de Ventas</a>
                 </div>
             </div>
         </li>

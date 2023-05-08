@@ -5,9 +5,12 @@
             <div id="content-wrapper" class="d-flex flex-column">
                 <div id="content">
                     <TopBar></TopBar>
+                    <!-- ADMIN DROPDOWN -->
                     <notFound    v-if="mainView == 0"></notFound>
                     <ContModule  v-if="mainView == 3"></ContModule>
                     <ProvModule  v-if="mainView == 4"></ProvModule>
+                    <!-- PUNTO DE VENTAS DROPDOWN -->
+                    <puntoVenta  v-if="mainView == 5"></puntoVenta>
                 </div>
                 <CustomFooter></CustomFooter>
             </div>
@@ -27,6 +30,8 @@ import notFound from "./notFound.vue";
 // MENU DE OPCIONES ADMIN //
 import ContModule from "./ContratosModule.vue";
 import ProvModule from "./ProvModule.vue";
+// MANU DE PUNTO DE VENTA //
+import puntoVenta from "./PuntoVenta.vue";
 
 export default {
     data(){
@@ -38,9 +43,12 @@ export default {
         SideBar,
         TopBar,
         CustomFooter,
+        // ADMIN
         notFound,
         ContModule,
         ProvModule,
+        // PUNTO DE VENTA
+        puntoVenta,
     },
 
     methods:{
