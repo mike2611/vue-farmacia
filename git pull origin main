@@ -1,0 +1,128 @@
+[33mcommit 40eafe4212835d972351086e1fec5bd036c486d4[m[33m ([m[1;36mHEAD -> [m[1;32mprovConst[m[33m, [m[1;31morigin/provConst[m[33m)[m
+Author: MaoRusk <manolo_rod.98@hotmail.com>
+Date:   Tue May 2 23:34:03 2023 -0600
+
+    actualizacion punto de venta y modulos vacios 404
+
+[33mcommit f3f2e2fe4b130f2b8e1fc67b14078c86cdae3807[m
+Author: MaoRusk <manolo_rod.98@hotmail.com>
+Date:   Mon May 1 22:52:21 2023 -0600
+
+    Proveedores y Contratos
+
+[33mcommit 404ba7edf7670a9dd545a35a5d82fd091b4e80a2[m[33m ([m[1;32mprovCont[m[33m, [m[1;32mmain[m[33m)[m
+Merge: 0f50dc2 c1dc8e6
+Author: Miguel Puentes <mpuentes2611@gmail.com>
+Date:   Mon May 1 19:08:20 2023 -0600
+
+    Merge pull request #1 from mike2611/puntoVenta
+    
+    Punto venta
+
+[33mcommit c1dc8e633d97dbee25bfd975d2cddad0bfd50378[m[33m ([m[1;31morigin/puntoVenta[m[33m)[m
+Author: Mike2611 <mpuentes2611@gmail.com>
+Date:   Mon May 1 18:49:18 2023 -0600
+
+    Fix top logo puntoVenta
+
+[33mcommit 5ebeb9f04eeee299135bc4d5daf23a6ae7b953dd[m
+Author: Mike2611 <mpuentes2611@gmail.com>
+Date:   Mon May 1 18:41:13 2023 -0600
+
+    Add router to the project and Add link from dashboard to puntoVenta
+
+[33mcommit e0f753822a539c4d0b65ff735dcd46ac7b1a44e8[m
+Author: Mike2611 <mpuentes2611@gmail.com>
+Date:   Mon May 1 18:29:44 2023 -0600
+
+    Add component PuntoVenta
+
+[33mcommit 0f50dc23e3b49095c8670014670647cb8cd77d9b[m
+Author: Mike2611 <mpuentes2611@gmail.com>
+Date:   Mon May 1 17:36:21 2023 -0600
+
+    Add boostrap 4 and add script Jquery
+
+[33mcommit c738076cbc7df660e629d83f65b55f24ae991174[m
+Author: Mike2611 <mpuentes2611@gmail.com>
+Date:   Mon May 1 16:29:17 2023 -0600
+
+    Agregar font awesome al proyecto
+
+[33mcommit 1f1e2e91cd9cd3fbd9504a633ddff0f0b07faeac[m
+Author: Mike2611 <mpuentes2611@gmail.com>
+Date:   Mon May 1 16:18:05 2023 -0600
+
+    Change profile img path
+
+[33mcommit 305799b672a648eddbe273000c2617e040469953[m
+Author: Mike2611 <mpuentes2611@gmail.com>
+Date:   Mon May 1 16:14:53 2023 -0600
+
+    Add img to project
+
+[33mcommit 93af6d8c82ba4ce964949149d4a3b3ca0c3e2472[m
+Author: Mike2611 <mpuentes2611@gmail.com>
+Date:   Sun Apr 30 20:52:45 2023 -0600
+
+    Añadir fontAwesome CDn
+
+[33mcommit 12e3710753d4713c92512aefd8a24de5cd34c05f[m
+Author: Mike2611 <mpuentes2611@gmail.com>
+Date:   Sun Apr 30 20:51:17 2023 -0600
+
+    Fix sidebar and TopBar
+
+[33mcommit acf31f1b4d48292a41868282020f427ac28b8ebc[m
+Author: Mike2611 <mpuentes2611@gmail.com>
+Date:   Sun Apr 30 20:42:42 2023 -0600
+
+    Añadir cdn par boostrap
+
+[33mcommit 10f20bcad71ed9c6de70e42d72932111cc260a45[m
+Author: Mike2611 <mpuentes2611@gmail.com>
+Date:   Sun Apr 30 20:40:38 2023 -0600
+
+    Correciones del proyecto
+
+[33mcommit c272caa5cd5cf09e4f2ae99687dfdd6216c5c30a[m
+Author: Mike2611 <mpuentes2611@gmail.com>
+Date:   Sun Apr 30 19:57:05 2023 -0600
+
+    Add global css
+
+[33mcommit 3ddd85ccee63efa9daf20922b455e71b1048191e[m
+Author: Mike2611 <mpuentes2611@gmail.com>
+Date:   Sun Apr 30 19:53:16 2023 -0600
+
+    Add Dashboard component
+
+[33mcommit 90778b4410d4bdf5d024699e25e1dfec749ee892[m
+Author: Mike2611 <mpuentes2611@gmail.com>
+Date:   Sun Apr 30 19:33:26 2023 -0600
+
+    Add footer component
+
+[33mcommit a62b715ce8f3ae832b0d5347c44deee4ac718128[m
+Author: Mike2611 <mpuentes2611@gmail.com>
+Date:   Sun Apr 30 19:32:43 2023 -0600
+
+    Add topbar component
+
+[33mcommit 425393f71abc46583872848b0b70bab3d809029a[m
+Author: Mike2611 <mpuentes2611@gmail.com>
+Date:   Sun Apr 30 19:24:16 2023 -0600
+
+    Add sidebar component
+
+[33mcommit 3f8b7a5e575cf9407ff3e94ea51648ec3e1bdd59[m
+Author: Mike2611 <mpuentes2611@gmail.com>
+Date:   Sun Apr 30 16:15:00 2023 -0600
+
+    Create Vue project
+
+[33mcommit 5ba9a57f8a1b80be5af3b84f2831fe248175bb5b[m
+Author: Miguel Puentes <mpuentes2611@gmail.com>
+Date:   Sun Apr 30 11:08:30 2023 -0600
+
+    Initial commit
