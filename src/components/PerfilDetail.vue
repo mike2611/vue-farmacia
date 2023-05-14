@@ -16,10 +16,10 @@
                     <div class="form-row">
                         <div class="form-group col-md-8">
                             <label for="inputEmail4">Descripción:</label>
-                            <input type="text" class="form-control" />
+                            <input type="text" class="form-control" id="txtDescripcion"/>
                         </div>                        
                     </div>
-                    <button type="button" class="btn btn-success btn-lg">
+                    <button type="button" class="btn btn-success btn-lg" @click="fnGuardar();">
                         <i class="bi bi-upload"></i>
                         Guardar
                     </button>
@@ -30,19 +30,36 @@
 </template>
 
 <script>
+import axios from 'axios';
 
 export default {
     name: "PerfilDetail",
     props: ['Detailview'],
     data(){
         return{
-            
+            placeholders: [],
         }
     },
 
     methods:{
         btnRegresar(){
             this.$emit("templateDetail", null);
+        },
+
+        fnGuardar(){
+            let descripcion  = document.getElementById("txtDescripcion").value;
+            if( descripcion  == "" ) { alert("Favor de ingresar una descripción válido"); return; }
+
+            let ObjectData = {
+                descripcion  : descripcion,
+            }
+
+            console.log(ObjectData);
+
+            axios.post('http://localhost:3000/perfiles', JSON.stringify(ObjectData)).then((response) => {
+                this.placeholders = response.data;
+                console.log("Envio correcto");
+            });
         }
     },
 };
