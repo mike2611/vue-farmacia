@@ -10138,7 +10138,7 @@
     vertical-align: 0;
     border: 0;
     font-weight: 900;
-    content: '\f105';
+    content: '\F231';
     font-family: 'Font Awesome 5 Free';
   }
   
@@ -10439,7 +10439,7 @@
   }
   
   .sidebar.toggled #sidebarToggle::after {
-    content: '\f105';
+    content: '\F231';
     font-family: 'Font Awesome 5 Free';
     margin-left: 0.25rem;
   }
@@ -10557,7 +10557,7 @@
       font-family: 'Font Awesome 5 Free';
     }
     .sidebar .nav-item .nav-link[data-toggle="collapse"].collapsed::after {
-      content: '\f105';
+      content: '\F231';
     }
     .sidebar .sidebar-brand .sidebar-brand-icon i {
       font-size: 2rem;
@@ -10821,7 +10821,7 @@
   }
   
   .card .card-header[data-toggle="collapse"].collapsed::after {
-    content: '\f105';
+    content: '\F231';
   }
   
   .chart-area {

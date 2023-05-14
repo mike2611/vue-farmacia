@@ -1,10 +1,12 @@
 <template>
-    <div class="container-fluid">
+    <div class="container-fluid" v-if="Detailview == null">
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Proveedores</h1>
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                    class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+            <a class="d-none d-sm-inline-block btn btn-primary btn-lg shadow-sm" @click="templateDetail(1)">
+                <i class="bi bi-plus-square"></i>
+                Nuevo
+            </a>
         </div>
 
         <div class="card shadow mb-4">
@@ -109,4 +111,31 @@
             </div>
         </div>
     </div>
+    <!-- TEMPLATE DETAIL -->
+    <detailComponent v-else
+        :Detailview="Detailview"
+        @templateDetail="templateDetail"></detailComponent>
 </template>
+
+<script>
+
+import detailComponent from "./ProvDetail.vue";
+
+export default {
+    name: "UsuariosModule",
+    data(){
+        return{
+            Detailview: null,
+        }
+    },
+    components: {
+        detailComponent,
+    },
+    methods:{
+        templateDetail(value){
+
+            this.Detailview = value;
+        },
+    },
+};
+</script>

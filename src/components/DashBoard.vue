@@ -7,6 +7,9 @@
                     <TopBar></TopBar>
                     <!-- ADMIN DROPDOWN -->
                     <notFound    v-if="mainView == 0"></notFound>
+                    <!-- MODULO DE USUARIOS -->
+                    <UserModule  v-if="mainView == 1"></UserModule>
+                    <PerfilModule  v-if="mainView == 2"></PerfilModule>
                     <ContModule  v-if="mainView == 3"></ContModule>
                     <ProvModule  v-if="mainView == 4"></ProvModule>
                     <!-- PUNTO DE VENTAS DROPDOWN -->
@@ -28,6 +31,8 @@ import CustomFooter from "./CustomFooter.vue";
 // notFound
 import notFound from "./notFound.vue";
 // MENU DE OPCIONES ADMIN //
+import UserModule from "./UsuariosModule.vue";
+import PerfilModule from "./PerfilModule.vue";
 import ContModule from "./ContratosModule.vue";
 import ProvModule from "./ProvModule.vue";
 // MANU DE PUNTO DE VENTA //
@@ -45,6 +50,8 @@ export default {
         CustomFooter,
         // ADMIN
         notFound,
+        UserModule,
+        PerfilModule,
         ContModule,
         ProvModule,
         // PUNTO DE VENTA

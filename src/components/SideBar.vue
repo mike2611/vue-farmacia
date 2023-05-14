@@ -31,14 +31,15 @@
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                 aria-expanded="true" aria-controls="collapseTwo">
-                <i class="fas fa-fw fa-cog"></i>
+                <!-- <i class="fas fa-fw fa-cog"></i> -->
+                <i class="bi bi-gear"></i>
                 <span>Opciones</span>
             </a>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <!-- <h6 class="collapse-header">Custom Components:</h6> -->
-                    <a class="collapse-item" href="#" @click="pruebaTemplate(0)">Usuarios</a>
-                    <a class="collapse-item" href="#" @click="pruebaTemplate(0)">Perfiles</a>
+                    <a class="collapse-item" href="#" @click="pruebaTemplate(1)">Usuarios</a>
+                    <a class="collapse-item" href="#" @click="pruebaTemplate(2)">Perfiles</a>
                     <a class="collapse-item" href="#" @click="pruebaTemplate(3)">Contratos</a>
                     <a class="collapse-item" href="#" @click="pruebaTemplate(4)">Proveedores</a>
                 </div>
@@ -49,7 +50,8 @@
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                 aria-expanded="true" aria-controls="collapseUtilities">
-                <i class="fas fa-fw fa-wrench"></i>
+                <!-- <i class="fas fa-fw fa-wrench"></i> -->
+                <i class="bi bi-key"></i>
                 <span>Punto de Venta</span>
             </a>
             <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
@@ -82,9 +84,7 @@
 <script>
 export default {
     name: "SideBar",
-    // props: {
-    //     changeView: { type: Number, default: null },
-    // },
+    
     methods:{
         pruebaTemplate(optionView){ this.$emit("changeView", optionView); },
     }
