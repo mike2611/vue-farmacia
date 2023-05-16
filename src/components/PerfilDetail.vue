@@ -46,20 +46,21 @@ export default {
             this.$emit("templateDetail", null);
         },
 
-        fnGuardar(){
+        async fnGuardar(){
             let descripcion  = document.getElementById("txtDescripcion").value;
-            if( descripcion  == "" ) { alert("Favor de ingresar una descripción válido"); return; }
+            if( descripcion  == "" ) { alert("Favor de ingresar una descripción válida"); return; }
 
-            let ObjectData = {
-                descripcion  : descripcion,
-            }
+            const ObjectData = {
+                descripcion: descripcion,
+            };
 
-            console.log(ObjectData);
-
-            axios.post('http://localhost:3000/perfiles', JSON.stringify(ObjectData)).then((response) => {
+            try {
+                const response = await axios.post('http://localhost:3000/perfiles', ObjectData);
                 this.placeholders = response.data;
                 console.log("Envio correcto");
-            });
+            } catch (error) {
+                console.error("Hubo un error al enviar los datos: ", error);
+            }
         }
     },
 };

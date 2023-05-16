@@ -124,7 +124,7 @@ export default {
 
             console.log(ObjectData);
 
-            axios.post('localhost:3000/empleados').then((response) => {
+            axios.get('localhost:3000/empleados').then((response) => {
                 this.placeholders = response.data;
                 console.log(this.placeholders);
             });
