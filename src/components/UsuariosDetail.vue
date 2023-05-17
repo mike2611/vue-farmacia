@@ -9,7 +9,7 @@
         </div>
         
         <div class="card shadow mb-4">
-            <div class="card-header py-3">Datos de Usuario</div>
+            <div class="card-header py-3">Datos del Empleado</div>
             <div class="card-body">
                 <!-- FORM LLENADO DE DATOS -->
                 <form>
@@ -27,7 +27,11 @@
 
                         <div class="form-group col-md-6">
                             <label for="inputEmail4">Nombre(s):</label>
-                            <input type="text" class="form-control" id="txtNombre" />
+                            <input  type="text"
+                                    class="form-control"
+                                    v-model="text"
+                                    @blur="capitalize"
+                                    id="txtNombre" />
                         </div>
 
                         <div class="form-group col-md-6">
@@ -65,9 +69,14 @@
                         </div>
                     </div>
 
-                    <button type="button" class="btn btn-success btn-lg" @click="fnGuardar();">
+                    <button v-if="empleadoID == null" type="button" class="btn btn-success btn-lg" @click="fnGuardar();">
                         <i class="bi bi-upload"></i>
                         Guardar
+                    </button>
+
+                    <button v-else type="button" class="btn btn-success btn-lg" @click="fnModificar();">
+                        <i class="bi bi-pencil-square"></i>
+                        Modificar
                     </button>
 
                 </form>
@@ -81,24 +90,27 @@
 import axios from 'axios';
 export default {
     name: "UsuariosDetail",
-    props: ['Detailview'],
+
+    props: ['Detailview', 'empleado'],
+
     data(){
         return{
             placeholders: [],
             perfiles    : [],
             Usuarios    : [],
+            empleadoID  : null,
+            // capitalize inputs //
+            text: ''
         }
     },
 
     created(){
         this.getPerfiles();
     },
-
     methods:{
         btnRegresar(){
             this.$emit("templateDetail", null);
         },
-
         getPerfiles(){
             axios.get('http://localhost:3000/perfiles').then((response) => {
                 this.perfiles   = [];
@@ -107,7 +119,7 @@ export default {
                 for (const key in arrayData) {
                     perfiles.push(arrayData[key]);
                 }
-                // this.getUserIdData(this.idEmp);
+                if( this.empleado != undefined ){ this.getUserIdData(this.empleado); }
             });
         },
         async fnGuardar(){
@@ -156,20 +168,79 @@ export default {
             }
 
         },
-
         // PARA MODIFICAR //
-        getUserIdData(){
-            // let urlQuery = 'http://localhost:3000/empleados' + this.idEmp;
-            // alert(urlQuery);
-            // axios.get().then((response) => {
-            //     this.empleados  = [];
-            //     let arrayData   = response.data;
-            //     let empleados   = this.empleados;
-            //     for (const key in arrayData) {
-            //         empleados.push(arrayData[key]);
-            //     }
-            //     console.log(empleados);
-            // });
+        getUserIdData(empleado){
+            this.empleadoID = empleado;
+            let urlQuery    = `http://localhost:3000/empleados/${empleado}`;            
+            axios.get(urlQuery).then((response) => {
+                let arrayData   = response.data;
+                for (const key in arrayData) { 
+                   document.getElementById("cboPerfil").value   = arrayData[key].id_perfil;
+                   document.getElementById("txtNombre").value   = arrayData[key].nombre;
+                   document.getElementById("txtPaterno").value  = arrayData[key].paterno;
+                   document.getElementById("txtMaterno").value  = arrayData[key].materno;
+                   document.getElementById("txtEdad").value     = arrayData[key].edad;
+                   document.getElementById("txtUsuario").value  = arrayData[key].usuario;
+                   document.getElementById("txtClave").value    = arrayData[key].clave;                    
+                }
+            });
+        },
+        async fnModificar() {
+            let id_perfil   = document.getElementById("cboPerfil").value;
+            let nombre      = document.getElementById("txtNombre").value;
+            let paterno     = document.getElementById("txtPaterno").value;
+            let materno     = document.getElementById("txtMaterno").value;
+            let edad        = document.getElementById("txtEdad").value;
+            let usuario     = document.getElementById("txtUsuario").value;
+            let clave       = document.getElementById("txtClave").value;
+
+            if( id_perfil   == 0 ) { alert("Favor de seleccionar un perfil válido");        return; }
+            if( nombre      == "") { alert("Favor de ingresar un nombre válido");           return; }
+            if( paterno     == "") { alert("Favor de ingresar un apellido paterno válido"); return; }
+            if( materno     == "") { alert("Favor de ingresar un apellido materno válido"); return; }
+            if( edad        == "") { alert("Favor de ingresar una edad válida");            return; }
+            if( usuario     == "") { alert("Favor de ingresar un usuario válido");          return; }
+            if( clave       == "") { alert("Favor de ingresar una clave válido");           return; }
+
+            const ObjectData = {
+                id_perfil   : id_perfil,
+                nombre      : nombre,
+                paterno     : paterno,
+                materno     : materno,
+                edad        : edad,
+                usuario     : usuario,
+                clave       : clave
+            }
+
+            try {
+                const response  = await axios.put('http://localhost:3000/empleados/' + this.empleado, ObjectData);
+                this.Usuarios   = response.data;
+                alert("Envio correcto");
+
+                document.getElementById("cboPerfil").value  = "0";
+                document.getElementById("txtNombre").value  = "";
+                document.getElementById("txtPaterno").value = "";
+                document.getElementById("txtMaterno").value = "";
+                document.getElementById("txtEdad").value    = "";
+                document.getElementById("txtUsuario").value = "";
+                document.getElementById("txtClave").value   = "";
+
+                this.btnRegresar();
+
+
+            } catch (error) {
+                alert("Hubo un error al enviar los datos: ", error);
+            }
+        },
+        capitalize() {
+            const [firstLetter, ...rest] = this.text.split('');
+            const upperCaseLetter = firstLetter.toUpperCase();
+      
+            if (firstLetter === upperCaseLetter) {
+                return;
+            }
+
+            this.text = firstLetter.toUpperCase() + rest.join('');
         }
     },
 };

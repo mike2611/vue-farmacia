@@ -38,7 +38,7 @@
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <!-- <h6 class="collapse-header">Custom Components:</h6> -->
-                    <a class="collapse-item" href="#" @click="pruebaTemplate(1)">Usuarios</a>
+                    <a class="collapse-item" href="#" @click="pruebaTemplate(1)">Empleados</a>
                     <a class="collapse-item" href="#" @click="pruebaTemplate(2)">Perfiles</a>
                     <a class="collapse-item" href="#" @click="pruebaTemplate(3)">Contratos</a>
                     <a class="collapse-item" href="#" @click="pruebaTemplate(4)">Proveedores</a>

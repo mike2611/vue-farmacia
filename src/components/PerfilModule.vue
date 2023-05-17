@@ -20,7 +20,7 @@
                             <thead>
                                 <tr>
                                     <th>Id</th>
-                                    <th>Descripcion</th>
+                                    <th>Descripción</th>
                                 </tr>
                             </thead>
                             <tbody v-if="perfiles != null">

@@ -3,7 +3,7 @@
         <!-- TEMPLATE PRINCIPAL -->
         <div>
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">Usuarios</h1>
+                <h1 class="h3 mb-0 text-gray-800">Empleados</h1>
                 <!-- <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" @click="templateDetail(1)"> -->
                 <a class="d-none d-sm-inline-block btn btn-primary btn-lg shadow-sm" @click="templateDetail(1)">
                     <i class="bi bi-plus-square"></i>
@@ -53,6 +53,7 @@
     
     <detailComponent v-else
         :Detailview="Detailview"
+        :empleado="empleado"
         @templateDetail="templateDetail"></detailComponent>
     
 </template>
@@ -67,7 +68,7 @@ export default {
     data(){
         return{
             Detailview  : null,
-            idEmp       : null,
+            empleado    : 0,
             empleados   : [],
         }
     },
@@ -80,6 +81,7 @@ export default {
     methods:{
         templateDetail(value){
             this.Detailview = value;
+            this.empleado   = null;
             this.getData();
         },
         getData(){
@@ -104,9 +106,9 @@ export default {
             }
         },
         btnEditar(value, id){
-            this.idEmp      = id;
+            console.log(id);
+            this.empleado   = id;
             this.Detailview = value;
-            this.getData();
         },
     },
 };
