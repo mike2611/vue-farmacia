@@ -57,9 +57,9 @@ export default {
             try {
                 const response = await axios.post('http://localhost:3000/perfiles', ObjectData);
                 this.placeholders = response.data;
-                console.log("Envio correcto");
+                alert("Envio correcto");
             } catch (error) {
-                console.error("Hubo un error al enviar los datos: ", error);
+                alert("Hubo un error al enviar los datos: ", error);
             }
         }
     },

@@ -18,9 +18,7 @@
                             <label for="inputEmail4">Perfil:</label>
                             <select id="cboPerfil" class="form-control">
                                 <option value="0" selected>SELECCIONAR</option>
-                                <option value="1">Administrador</option>
-                                <option value="2">Empleado</option>
-                                <option value="3">Proveedor</option>
+                                <option v-for="(item, index) of perfiles" :key="index" :value="item.id">{{item.descripcion}}</option>
                             </select>
                         </div>
                     </div>
@@ -81,54 +79,98 @@
 
 <script>
 import axios from 'axios';
-// const Swal = SweetAlert;
 export default {
     name: "UsuariosDetail",
     props: ['Detailview'],
     data(){
         return{
             placeholders: [],
+            perfiles    : [],
+            Usuarios    : [],
         }
+    },
+
+    created(){
+        this.getPerfiles();
     },
 
     methods:{
         btnRegresar(){
             this.$emit("templateDetail", null);
         },
-        fnGuardar(){
-            let perfil  = document.getElementById("cboPerfil").value;
-            let nombre  = document.getElementById("txtNombre").value;
-            let paterno = document.getElementById("txtPaterno").value;
-            let materno = document.getElementById("txtMaterno").value;
-            let edad    = document.getElementById("txtEdad").value;
-            let usuario = document.getElementById("txtUsuario").value;
-            let clave   = document.getElementById("txtClave").value;
 
-            if( perfil  == 0 ) { alert("Favor de seleccionar un perfil válido");        return; }
-            if( nombre  == "") { alert("Favor de ingresar un nombre válido");           return; }
-            if( paterno == "") { alert("Favor de ingresar un apellido paterno válido"); return; }
-            if( materno == "") { alert("Favor de ingresar un apellido materno válido"); return; }
-            if( edad    == "") { alert("Favor de ingresar una edad válida");            return; }
-            if( usuario == "") { alert("Favor de ingresar un usuario válido");          return; }
-            if( clave   == "") { alert("Favor de ingresar una clave válido");           return; }
-
-            let ObjectData = {
-                perfil  : perfil,
-                nombre  : nombre,
-                paterno : paterno,
-                materno : materno,
-                edad    : edad,
-                usuario : usuario,
-                clave   : clave
-            }
-
-            console.log(ObjectData);
-
-            axios.get('localhost:3000/empleados').then((response) => {
-                this.placeholders = response.data;
-                console.log(this.placeholders);
+        getPerfiles(){
+            axios.get('http://localhost:3000/perfiles').then((response) => {
+                this.perfiles   = [];
+                let arrayData   = response.data;
+                let perfiles    = this.perfiles;
+                for (const key in arrayData) {
+                    perfiles.push(arrayData[key]);
+                }
+                // this.getUserIdData(this.idEmp);
             });
         },
+        async fnGuardar(){
+            let id_perfil   = document.getElementById("cboPerfil").value;
+            let nombre      = document.getElementById("txtNombre").value;
+            let paterno     = document.getElementById("txtPaterno").value;
+            let materno     = document.getElementById("txtMaterno").value;
+            let edad        = document.getElementById("txtEdad").value;
+            let usuario     = document.getElementById("txtUsuario").value;
+            let clave       = document.getElementById("txtClave").value;
+
+            if( id_perfil   == 0 ) { alert("Favor de seleccionar un perfil válido");        return; }
+            if( nombre      == "") { alert("Favor de ingresar un nombre válido");           return; }
+            if( paterno     == "") { alert("Favor de ingresar un apellido paterno válido"); return; }
+            if( materno     == "") { alert("Favor de ingresar un apellido materno válido"); return; }
+            if( edad        == "") { alert("Favor de ingresar una edad válida");            return; }
+            if( usuario     == "") { alert("Favor de ingresar un usuario válido");          return; }
+            if( clave       == "") { alert("Favor de ingresar una clave válido");           return; }
+
+            const ObjectData = {
+                id_perfil   : id_perfil,
+                nombre      : nombre,
+                paterno     : paterno,
+                materno     : materno,
+                edad        : edad,
+                usuario     : usuario,
+                clave       : clave
+            }
+
+            try {
+                const response  = await axios.post('http://localhost:3000/empleados', ObjectData);
+                this.Usuarios   = response.data;
+                alert("Envio correcto");
+
+                document.getElementById("cboPerfil").value  = "0";
+                document.getElementById("txtNombre").value  = "";
+                document.getElementById("txtPaterno").value = "";
+                document.getElementById("txtMaterno").value = "";
+                document.getElementById("txtEdad").value    = "";
+                document.getElementById("txtUsuario").value = "";
+                document.getElementById("txtClave").value   = "";
+
+
+            } catch (error) {
+                alert("Hubo un error al enviar los datos: ", error);
+            }
+
+        },
+
+        // PARA MODIFICAR //
+        getUserIdData(){
+            // let urlQuery = 'http://localhost:3000/empleados' + this.idEmp;
+            // alert(urlQuery);
+            // axios.get().then((response) => {
+            //     this.empleados  = [];
+            //     let arrayData   = response.data;
+            //     let empleados   = this.empleados;
+            //     for (const key in arrayData) {
+            //         empleados.push(arrayData[key]);
+            //     }
+            //     console.log(empleados);
+            // });
+        }
     },
 };
 </script>

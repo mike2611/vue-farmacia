@@ -24,34 +24,23 @@
                                     <th>Nombre</th>
                                     <th>Perfil</th>
                                     <th>Usuario</th>
+                                    <th>-</th>
                                 </tr>
                             </thead>
-                            <tfoot>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Nombre</th>
-                                    <th>Perfil</th>
-                                    <th>Usuario</th>
-                                </tr>
-                            </tfoot>
-                            <tbody>
-                                <tr>
-                                    <td>001</td>
-                                    <td>Jose Manuel Rdz Perez</td>
-                                    <td>Empleado</td>
-                                    <td>usuario1</td>
-                                </tr>
-                                <tr>
-                                    <td>002</td>
-                                    <td>Administrador 1</td>
-                                    <td>Administrador</td>
-                                    <td>admin1</td>
-                                </tr>
-                                <tr>
-                                    <td>003</td>
-                                    <td>Proveedor 1</td>
-                                    <td>Proveedor</td>
-                                    <td>prov1</td>
+                            <tbody v-if="empleados != null">
+                                <tr v-for="(item, index) of empleados" :key="index">
+                                    <td>{{item.id}}</td>
+                                    <td>{{item.nombre}} {{item.paterno }} {{item.materno}}</td>
+                                    <td>{{item.perfil}}</td>
+                                    <td>{{item.usuario}}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-success" @click="btnEditar(1, item.id)">
+                                            <i class="bi bi-pencil-fill"></i> Editar
+                                        </button>
+                                        <button type="button" class="btn btn-danger" @click="btnEliminar(item.id)">
+                                            <i class="bi bi-trash-fill"></i> Eliminar
+                                        </button>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -71,21 +60,53 @@
 <script>
 
 import detailComponent from "./UsuariosDetail.vue";
+import axios from 'axios';
 
 export default {
     name: "UsuariosModule",
     data(){
         return{
-            Detailview: null,
+            Detailview  : null,
+            idEmp       : null,
+            empleados   : [],
         }
     },
     components: {
         detailComponent,
     },
+    created(){
+        this.getData();
+    },
     methods:{
         templateDetail(value){
-
             this.Detailview = value;
+            this.getData();
+        },
+        getData(){
+            axios.get('http://localhost:3000/empleados').then((response) => {
+                this.empleados  = [];
+                let arrayData   = response.data;
+                let empleados   = this.empleados;
+                for (const key in arrayData) {
+                    empleados.push(arrayData[key]);
+                }
+                console.log(empleados);
+            });
+        },
+        btnEliminar(idEmpleado){
+            var opcion = confirm("¿Dese eliminar este usuario?");
+            if (opcion == true) {
+                axios.delete(`http://localhost:3000/empleados/${idEmpleado}`).then((response) => {
+                    let confirm = response.data;
+                    console.log(confirm);
+                    this.getData();
+                });
+            }
+        },
+        btnEditar(value, id){
+            this.idEmp      = id;
+            this.Detailview = value;
+            this.getData();
         },
     },
 };
