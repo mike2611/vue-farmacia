@@ -35,13 +35,13 @@
                                 <h6 class="blue-color font-weight-bold">Cantidad de {{selectedProductName ? selectedProductName : "este producto"}}: </h6>
                                 <input  v-model.number="selectedProductQuantity"  class="m-3" type="number" placeholder="0">
                                 <h6 class="blue-color font-weight-bold">Precio Unitario: </h6>
-                                <input class="m-3" type="number" :value="selectedProductPrice" readonly>
+                                <input class="m-3" type="text" :value="selectedProductPrice | formatoMoneda " readonly>
                                 <button type="button" class="btn btn-primary btn-sm" @click="añadirProducto()">Añadir producto</button>
                             </div>
 
                             <div>
                                 <div class="ml-4">
-                                    <span class="blue-color font-weight-bold">Cuenta Actual:</span>
+                                    <span class="blue-color font-weight-bold">{{cuenta.length > 0 ? "Cuenta Actual:" : "Aún no agrega ningún producto a su cuenta" }}</span>
                                     <div class="d-flex">
                                         <ul class="list-group m-3">
                                             <li v-for="producto in cuenta" :key="producto.nombre" class="list-group-item">
@@ -51,39 +51,41 @@
                                         </ul>
                                         <ul class="list-group m-3">
                                             <li  v-for="producto in cuenta" :key="producto.nombre" class="list-group-item">
-                                                {{producto.cantidad}} unidade(s) X $ {{producto.precio_venta}}
+                                                {{producto.cantidad}} unidade(s) X {{producto.precio_venta | formatoMoneda }}
                                             </li>                                
                                         </ul>
                                         <ul class="list-group m-3">
                                             <li  v-for="producto in cuenta" :key="producto.nombre" class="list-group-item">
-                                                $ {{producto.cantidad * producto.precio_venta}}
+                                                {{producto.cantidad * producto.precio_venta | formatoMoneda }}
                                             </li>                                
                                         </ul>
                                     </div>
-                                    <div class="d-flex flex-row justify-content-end m-3">
-                                        <div class="d-flex flex-column align-items-end">
-                                            <div class="d-flex justify-content-between w-100">
-                                                <b class="mt-2">SubTotal:</b>
-                                                <b class="mt-2 black-color">$ 1050.00</b>
-                                            </div>
-                                            <div class="d-flex justify-content-between w-100">
-                                                <b class="mt-2">Descuento(s):</b>
-                                                <b class="mt-2 black-color">$ 150.00</b>
-                                            </div>
-                                            <div class="d-flex justify-content-between w-100">
-                                                <b class="mt-2">IVA:</b>
-                                                <b class="mt-2 black-color">$ 144.00</b>
-                                            </div>
-                                            <div class="d-flex justify-content-between w-100">
-                                                <b class="mt-2 blue-color">Total:</b>
-                                                <b class="mt-2 black-color">$ 1044.00</b>
+                                    <div v-if="cuenta.length > 0">
+                                        <div class="d-flex flex-row justify-content-end m-3">
+                                            <div class="d-flex flex-column align-items-end">
+                                                <div class="d-flex justify-content-between w-100">
+                                                    <b class="mt-2">SubTotal:</b>
+                                                    <b class="mt-2 black-color">{{subtotal | formatoMoneda }}</b>
+                                                </div>
+                                                <div class="d-flex justify-content-between w-100">
+                                                    <b class="mt-2">Descuento(s):</b>
+                                                    <b class="mt-2 black-color">{{descuentos | formatoMoneda }}</b>
+                                                </div>
+                                                <div class="d-flex justify-content-between w-100">
+                                                    <b class="mt-2">IVA:</b>
+                                                    <b class="mt-2 black-color">{{iva | formatoMoneda }}</b>
+                                                </div>
+                                                <div class="d-flex justify-content-between w-100">
+                                                    <b class="mt-2 blue-color">Total:</b>
+                                                    <b class="mt-2 black-color">{{total | formatoMoneda }}</b>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    
-                                    <div class="d-flex flex-row-reverse mb-5 mr-3">
-                                        <button type="button" class="ml-2 btn btn-primary btn-sm">Pagar</button>
-                                        <button type="button" class="ml-2 btn btn-danger btn-sm">Limpiar Todo</button>
+                                        
+                                        <div class="d-flex flex-row-reverse mb-5 mr-3">
+                                            <button type="button" class="ml-2 btn btn-primary btn-sm">Pagar</button>
+                                            <button type="button" class="ml-2 btn btn-danger btn-sm">Limpiar Todo</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -131,8 +133,23 @@
             selectedProductPrice: null,
             selectedProductName: null,
             selectedProductQuantity: 0,
-            cuenta: []
+            cuenta: [],
+            subtotal: 0,
+            descuentos: 0,
+            iva: 0,
+            total: 0,
         }
+    },
+    filters: {
+    formatoMoneda(valor) {
+      if(!valor) return '';
+      const formatter = new Intl.NumberFormat("es-MX", {
+        style: "currency",
+        currency: "MXN",
+        minimumFractionDigits: 2,
+      });
+      return formatter.format(valor);
+    },
     },
     methods: {
         selectProduct(producto, index) {
@@ -149,6 +166,13 @@
                     precio_venta: producto.precio_venta,
                     cantidad: this.selectedProductQuantity
                 });
+                this.subtotal += this.selectedProductQuantity * producto.precio_venta;
+                this.descuentos = 10;
+                this.iva = (this.subtotal - this.descuentos) * 0.16;
+                this.total += this.subtotal - this.descuentos + this.iva;
+
+                this.selectedProductQuantity = 0;
+
             }
         }
     }
