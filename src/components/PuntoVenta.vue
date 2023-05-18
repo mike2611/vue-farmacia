@@ -84,7 +84,7 @@
                                         
                                         <div class="d-flex flex-row-reverse mb-5 mr-3">
                                             <button type="button" class="ml-2 btn btn-primary btn-sm" @click="generaTicketPDF">Pagar</button>
-                                            <button type="button" class="ml-2 btn btn-danger btn-sm">Limpiar Todo</button>
+                                            <button type="button" class="ml-2 btn btn-danger btn-sm" @click="vaciarCuenta">Limpiar Todo</button>
                                         </div>
                                     </div>
                                 </div>
@@ -180,35 +180,64 @@
             }
         },
         generaTicketPDF() {
-        const docDefinition = {
-        content: [
-            // Encabezado del ticket
-            { text: 'Farmacia XYZ', style: 'header' },
-            { text: 'Dirección de la farmacia', style: 'subheader' },
-            { text: 'Fecha: ' + new Date().toLocaleDateString(), style: 'subheader' },
-            { text: ' ', style: 'subheader' },
-            
-            // Contenido de los productos en la cuenta
-            { text: 'Cuenta Actual:', style: 'subheader' },
-            { ul: this.cuenta.map(producto => `${producto.nombre} - ${producto.cantidad} unidades x ${producto.precio_venta | formatoMoneda}`) },
-            { text: ' ', style: 'subheader' },
-            
-            // Totales
-            { text: 'Totales:', style: 'subheader' },
-            { text: `SubTotal: ${this.subtotal | formatoMoneda}`, style: 'total' },
-            { text: `Descuento(s): ${this.descuentos | formatoMoneda}`, style: 'total' },
-            { text: `IVA: ${this.iva | formatoMoneda}`, style: 'total' },
-            { text: `Total: ${this.total | formatoMoneda}`, style: 'total' }
-        ],
-        styles: {
-            header: { fontSize: 18, bold: true, alignment: 'center' },
-            subheader: { fontSize: 14, bold: true, margin: [0, 0, 0, 10] },
-            total: { fontSize: 12, bold: true, margin: [0, 0, 0, 5] }
-        }
-        };
+        
+            const formatoMoneda = this.$options.filters.formatoMoneda;
 
-        pdfMake.createPdf(docDefinition).open();
+            const docDefinition = {
+            content: [
+                // Encabezado del ticket
+                { text: 'FarmaFacil', style: 'header' },
+                { text: 'Direccion : Ahuejote 493 No. S/N, Pedregal De Santo Domingo, 04369', style: 'subheader' },
+                { text: 'Fecha: ' + new Date().toLocaleDateString(), style: 'subheader' },
+                { text: ' ', style: 'subheader' },
+                
+                // Contenido de los productos en la cuenta
+                { text: 'Cuenta Actual:', style: 'subheader' },
+                { ul: this.cuenta.map(producto => `${producto.nombre} - ${producto.cantidad} unidades x ${producto.precio_venta | formatoMoneda}`) },
+                { text: ' ', style: 'subheader' },
+                
+                // Totales
+                { text: 'Totales:', style: 'subheader' },
+                { text: `SubTotal: ${this.subtotal | formatoMoneda}`, style: 'total' },
+                { text: `Descuento(s): ${this.descuentos | formatoMoneda}`, style: 'total' },
+                { text: `IVA: ${this.iva | formatoMoneda}`, style: 'total' },
+                { text: `Total: ${this.total | formatoMoneda}`, style: 'total' }
+            ],
+            styles: {
+                header: { fontSize: 18, bold: true, alignment: 'center' },
+                subheader: { fontSize: 14, bold: true, margin: [0, 0, 0, 10] },
+                total: { fontSize: 12, bold: true, margin: [0, 0, 0, 5] }
+            }
+            };
+
+            pdfMake.createPdf(docDefinition).open();
+            this.cuenta = [];
         },
+        vaciarCuenta() {
+            window.Swal.fire({
+                title: "¿Estás seguro?",
+                text: "¿Deseas vaciar la cuenta?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Aceptar",
+                cancelButtonText: "Cancelar",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                this.cuenta = [];
+                window.Swal.fire(
+                    "Cuenta vaciada",
+                    "La cuenta ha sido vaciada exitosamente.",
+                    "success"
+                );
+                } else {
+                    window.Swal.fire(
+                    "Operación cancelada"
+                );
+                }
+            });
+      },
     }
   };
 </script>
