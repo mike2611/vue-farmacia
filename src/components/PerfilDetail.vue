@@ -19,9 +19,14 @@
                             <input type="text" class="form-control" id="txtDescripcion"/>
                         </div>                        
                     </div>
-                    <button type="button" class="btn btn-success btn-lg" @click="fnGuardar();">
+                    <button v-if="perfil == null" type="button" class="btn btn-success btn-lg" @click="fnGuardar();">
                         <i class="bi bi-upload"></i>
                         Guardar
+                    </button>
+
+                    <button v-else type="button" class="btn btn-success btn-lg" @click="fnModificar();">
+                        <i class="bi bi-pencil-square"></i>
+                        Modificar
                     </button>
                 </form>
             </div>
@@ -34,11 +39,15 @@ import axios from 'axios';
 
 export default {
     name: "PerfilDetail",
-    props: ['Detailview'],
+    props: ['Detailview', 'perfil'],
     data(){
         return{
             placeholders: [],
         }
+    },
+
+    created(){
+        this.getPerfilIdData();
     },
 
     methods:{
@@ -61,7 +70,42 @@ export default {
             } catch (error) {
                 alert("Hubo un error al enviar los datos: ", error);
             }
-        }
+        },
+
+        // PARA MODIFICAR //
+        getPerfilIdData(){
+            if (this.perfil != null) {
+                let urlQuery    = `http://localhost:3000/perfiles/${this.perfil}`;            
+                axios.get(urlQuery).then((response) => {
+                    console.log(response.data);
+                    let arrayData   = response.data;
+                    console.log(arrayData);
+                    for (const key in arrayData) { 
+                       document.getElementById("txtDescripcion").value = arrayData[key].descripcion;
+                    }
+                });
+            }
+        },
+        async fnModificar() {
+            let descripcion  = document.getElementById("txtDescripcion").value;
+            if( descripcion  == "" ) { alert("Favor de ingresar una descripción válida"); return; }
+
+            const ObjectData = {
+                descripcion   : descripcion,
+            }
+
+            try {
+                const response  = await axios.put('http://localhost:3000/perfiles/' + this.perfil, ObjectData);
+                let result = response.data;
+                console.log(result);
+                alert("Datos modificados correctamente");
+                document.getElementById("txtDescripcion").value  = "0";
+                this.btnRegresar();
+
+            } catch (error) {
+                alert("Hubo un error al enviar los datos: ", error);
+            }
+        },
     },
 };
 </script>

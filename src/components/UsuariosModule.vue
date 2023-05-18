@@ -24,7 +24,7 @@
                                     <th>Nombre</th>
                                     <th>Perfil</th>
                                     <th>Usuario</th>
-                                    <th>-</th>
+                                    <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody v-if="empleados != null">

@@ -21,12 +21,21 @@
                                 <tr>
                                     <th>Id</th>
                                     <th>Descripción</th>
+                                    <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody v-if="perfiles != null">
                                 <tr v-for="(item, index) of perfiles" :key="index">
                                     <td>{{item.id}}</td>
                                     <td>{{item.descripcion}}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-success" @click="btnEditar(1, item.id)">
+                                            <i class="bi bi-pencil-fill"></i> Editar
+                                        </button>
+                                        <button type="button" class="btn btn-danger" @click="btnEliminar(item.id)">
+                                            <i class="bi bi-trash-fill"></i> Eliminar
+                                        </button>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -39,6 +48,7 @@
     
     <detailComponent v-else
         :Detailview="Detailview"
+        :perfil="perfil"
         @templateDetail="templateDetail"></detailComponent>
     
 </template>
@@ -52,8 +62,10 @@ export default {
     name: "UsuariosModule",
     data(){
         return{
-            Detailview: null,
-            perfiles: []
+            Detailview  : null,
+            perfil      : null,
+            perfiles    : [],
+
         }
     },
     components: {
@@ -65,6 +77,7 @@ export default {
     methods:{
         templateDetail(value){
             this.Detailview = value;
+            this.perfil     = null;
             this.getData();
         },
 
@@ -77,7 +90,22 @@ export default {
                     perfiles.push(arrayData[key]);
                 }
             });
-        }
+        },
+        btnEliminar(idPerfil){
+            var opcion = confirm("¿Dese eliminar este usuario?");
+            if (opcion == true) {
+                axios.delete(`http://localhost:3000/perfiles/${idPerfil}`).then((response) => {
+                    let confirm = response.data;
+                    console.log(confirm);
+                    this.getData();
+                });
+            }
+        },
+        btnEditar(value, id){
+            console.log(id);
+            this.perfil   = id;
+            this.Detailview = value;
+        },
     },
 };
 </script>
