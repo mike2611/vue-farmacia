@@ -6,15 +6,6 @@
             <div id="content">
                 <!-- Begin Page Content -->
                 <div class="d-flex justify-content-center">
-                    <!-- Page Heading -->
-                    <!-- <div class="center-top mt-4">
-                        <div class="d-flex justify-content-center" style="width: 15vw;">
-                            <h1 class="h3 mb-1 text-gray-800 m-2"> <b class="blue-color">F</b>arma<b class="blue-color">F</b>ácil</h1> 
-                            <div>
-                                <img src="../assets/img/farmaLogo6.png" alt="Logo Farmacia" width="40%">
-                            </div>
-                        </div>
-                    </div> -->
                     <div class="mt-5" style="width: 80vw">
                         <div class="d-flex flex-row align-items-center justify-content-around">
                             <div>
@@ -27,35 +18,25 @@
                                 </div>
 
                                 <ul class="list-group m-3">
-                                    <li class="list-group-item active" aria-current="true">
-                                        Paracetamol
-                                        <small> 500mgs</small>
-                                    </li>
-                                    <li class="list-group-item">
-                                        Aspirina 
-                                        <small> 500mgs</small>
-                                    </li>
-                                    <li class="list-group-item">
-                                        Complejo B
-                                        <small> 500mgs</small>
-                                    </li>
-                                    <li class="list-group-item">
-                                        Vitamina C
-                                        <small> 200mgs</small>
-                                    </li>
-                                    <li class="list-group-item">
-                                        Next
-                                        <small> 400mgs</small>
+                                    <li v-for="(producto, index) in productos" 
+                                        :key="producto.nombre" 
+                                        class="list-group-item"
+                                        role="button"
+                                        :class="{ active: selectedProductIndex === index}" 
+                                        @click="selectProduct(producto, index)"
+                                        >
+                                        {{producto.nombre}} 
+                                        <small>{{producto.descripcion}}</small>
                                     </li>
                                 </ul>
                             </div>
 
                             <div class="d-flex flex-column" style="width: 15%;">
-                                <h6 class="blue-color font-weight-bold">Cantidad de Paracetamol: </h6>
-                                <input  class="m-3" type="number" placeholder="0">
+                                <h6 class="blue-color font-weight-bold">Cantidad de {{selectedProductName ? selectedProductName : "este producto"}}: </h6>
+                                <input  v-model.number="selectedProductQuantity"  class="m-3" type="number" placeholder="0">
                                 <h6 class="blue-color font-weight-bold">Precio Unitario: </h6>
-                                <input class="m-3" type="number" value="80" readonly>
-                                <button type="button" class="btn btn-primary btn-sm">Añadir a la cuenta</button>
+                                <input class="m-3" type="number" :value="selectedProductPrice" readonly>
+                                <button type="button" class="btn btn-primary btn-sm" @click="añadirProducto()">Añadir producto</button>
                             </div>
 
                             <div>
@@ -63,100 +44,20 @@
                                     <span class="blue-color font-weight-bold">Cuenta Actual:</span>
                                     <div class="d-flex">
                                         <ul class="list-group m-3">
-                                            <li class="list-group-item">
-                                                Aspirina 
-                                                <small> 500mgs</small>
-                                            </li>
-                                            <li class="list-group-item">
-                                                Next
-                                                <small> 400mgs</small>
-                                            </li>
-                                            <li class="list-group-item">
-                                                Vitamina C
-                                                <small> 200mgs</small>
-                                            </li>
-                                            <li class="list-group-item">
-                                                Minerales 
-                                                <small> 500mgs</small>
-                                            </li>
-                                            <li class="list-group-item">
-                                                Proteina
-                                                <small> 400mgs</small>
-                                            </li>
-                                            <li class="list-group-item">
-                                                Jeringa
-                                                <small> 200mgs</small>
-                                            </li>
-                                            <li class="list-group-item">
-                                                Alcohol
-                                                <small> 500mgs</small>
-                                            </li>
-                                            <li class="list-group-item">
-                                                Algodon
-                                                <small> 400mgs</small>
-                                            </li>
-                                            <li class="list-group-item">
-                                                Vitamina D
-                                                <small> 200mgs</small>
-                                            </li>
+                                            <li v-for="producto in cuenta" :key="producto.nombre" class="list-group-item">
+                                                {{producto.nombre}} 
+                                                <small> {{producto.descripcion}}</small>
+                                            </li>                                            
                                         </ul>
                                         <ul class="list-group m-3">
-                                            <li class="list-group-item">
-                                                2 unidades X $ 100.00
-                                            </li>
-                                            <li class="list-group-item">
-                                                2 unidades X $ 50.00
-                                            </li>
-                                            <li class="list-group-item">
-                                                4 unidades X $ 200.00
-                                            </li>
-                                            <li class="list-group-item">
-                                                2 unidades X $ 100.00
-                                            </li>
-                                            <li class="list-group-item">
-                                                2 unidades X $ 50.00
-                                            </li>
-                                            <li class="list-group-item">
-                                                4 unidades X $ 200.00
-                                            </li>
-                                            <li class="list-group-item">
-                                                2 unidades X $ 100.00
-                                            </li>
-                                            <li class="list-group-item">
-                                                2 unidades X $ 50.00
-                                            </li>
-                                            <li class="list-group-item">
-                                                4 unidades X $ 200.00
-                                            </li>
+                                            <li  v-for="producto in cuenta" :key="producto.nombre" class="list-group-item">
+                                                {{producto.cantidad}} unidade(s) X $ {{producto.precio_venta}}
+                                            </li>                                
                                         </ul>
                                         <ul class="list-group m-3">
-                                            <li class="list-group-item">
-                                                $ 200.00
-                                            </li>
-                                            <li class="list-group-item">
-                                                $ 100.00
-                                            </li>
-                                            <li class="list-group-item">
-                                                $ 800.00
-                                            </li>
-                                            <li class="list-group-item">
-                                                $ 200.00
-                                            </li>
-                                            <li class="list-group-item">
-                                                $ 100.00
-                                            </li>
-                                            <li class="list-group-item">
-                                                $ 800.00
-                                            </li>
-                                            <li class="list-group-item">
-                                                $ 200.00
-                                            </li>
-                                            <li class="list-group-item">
-                                                $ 100.00
-                                            </li>
-                                            <li class="list-group-item">
-                                                $ 800.00
-                                            </li>
+                                            <li  v-for="producto in cuenta" :key="producto.nombre" class="list-group-item">
+                                                $ {{producto.cantidad * producto.precio_venta}}
+                                            </li>                                
                                         </ul>
                                     </div>
                                     <div class="d-flex flex-row justify-content-end m-3">
@@ -215,14 +116,41 @@
 </template>
   
 <script>
-//   import TopBar from "./TopBar.vue";
-//   import CustomFooter from "./CustomFooter.vue";
+
 
   export default {
     name: 'PuntoVenta',
-    components: {
-        // TopBar,
-        // CustomFooter
+    data() {
+        return{
+            productos: [
+                {nombre: 'Paracetamol', descripcion: '500mgs', precio_venta: 100},
+                {nombre: 'Aspirina', descripcion: '500mgs', precio_venta: 100},
+                {nombre: 'Complejo B', descripcion: '500mgs', precio_venta: 100},
+            ],
+            selectedProductIndex: null,
+            selectedProductPrice: null,
+            selectedProductName: null,
+            selectedProductQuantity: 0,
+            cuenta: []
+        }
+    },
+    methods: {
+        selectProduct(producto, index) {
+            this.selectedProductIndex = index;
+            this.selectedProductPrice = producto.precio_venta;
+            this.selectedProductName = producto.nombre;
+        },
+        añadirProducto() {
+            if(this.selectedProductIndex !== null && this.selectedProductQuantity > 0) {
+                const producto = this.productos[this.selectedProductIndex];
+                this.cuenta.push({
+                    nombre: producto.nombre,
+                    descripcion: producto.descripcion,
+                    precio_venta: producto.precio_venta,
+                    cantidad: this.selectedProductQuantity
+                });
+            }
+        }
     }
   };
 </script>
@@ -233,22 +161,12 @@
     }
     .black-color {
         color: black;
-    }
-    /*
-        .waves {
-            aspect-ratio: 900/600;
-            width: 100%;
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: cover;
-            background-image: url('../assets/img/waves6.svg');
-        }
-    */
+    }/*
     .center-top {
         position: absolute;
         top: 8%;
         left: 49%;
         transform: translateX(-50%);
-    }
+    } */
 </style>
   
