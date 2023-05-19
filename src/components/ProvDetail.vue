@@ -173,11 +173,9 @@ export default {
         noNumericTel(){
             this.txtTelefono    = this.txtTelefono.replace(/[^0-9]/g, "");
         },
-
         btnRegresar(){
             this.$emit("templateDetail", null);
         },
-
         // DROPDOWN'S PAIS, ESTADO, CIUDAD //
         getPaises(){
             axios.get('http://localhost:3000/paises').then((response) => {
@@ -194,7 +192,6 @@ export default {
                 }
             });
         },
-
         getEstados(idPais){
             axios.get('http://localhost:3000/estados/' + idPais).then((response) => {
                 this.estados    = [];
@@ -205,7 +202,6 @@ export default {
                 }
             });
         },
-
         getMunicipios(idEstado){
             axios.get('http://localhost:3000/municipios/' + idEstado).then((response) => {
                 this.municipios = [];
@@ -226,7 +222,6 @@ export default {
                 }
             });
         },
-
         // FUNCIONES CRUD //
         async fnGuardar(){
             let nombre      = document.getElementById("txtProveedor").value;
@@ -247,18 +242,18 @@ export default {
             let id_estado   = Number(document.getElementById("cboEstado").value);
             let id_municipio= Number(document.getElementById("cboCiudad").value);
             
-            if (nombre      == "" ) { alert("Favor de ingresar un proveedor válido");       return; }
-            if (razon_social== "" ) { alert("Favor de ingresar una razón social válida");   return; }
-            if (rfc         == "" ) { alert("Favor de ingresar una clave RFC válida");      return; }
-            if (colonia     == "" ) { alert("Favor de ingresar una colonia");               return; }
-            if (calle       == "" ) { alert("Favor de ingresar una calle valida");          return; }
-            if (num_int     == "" ) { alert("Favor de ingresar un número válido");          return; }
+            if (nombre      == "" ) { window.Swal.fire("Favor de ingresar un proveedor válido", "", "warning");       return; }
+            if (razon_social== "" ) { window.Swal.fire("Favor de ingresar una razón social válida", "", "warning");   return; }
+            if (rfc         == "" ) { window.Swal.fire("Favor de ingresar una clave RFC válida", "", "warning");      return; }
+            if (colonia     == "" ) { window.Swal.fire("Favor de ingresar una colonia", "", "warning");               return; }
+            if (calle       == "" ) { window.Swal.fire("Favor de ingresar una calle valida", "", "warning");          return; }
+            if (num_int     == "" ) { window.Swal.fire("Favor de ingresar un número válido", "", "warning");          return; }
             if (num_ext     == "" ) { num_ext = "";                                                 }
-            if (cod_p       == "" ) { alert("Favor de ingresar un código postal válido");   return; }
-            if (telefono    == "" ) { alert("Favor de ingresar un teléfono válido");        return; }
-            if (id_pais     == "0" ) { alert("Favor de ingresar un país válido");           return; }
-            if (id_estado   == "0" ) { alert("Favor de ingresar un estado válido");         return; }
-            if (id_municipio== "0" ) { alert("Favor de ingresar una ciudad válida");        return; }
+            if (cod_p       == "" ) { window.Swal.fire("Favor de ingresar un código postal válido", "", "warning");   return; }
+            if (telefono    == "" ) { window.Swal.fire("Favor de ingresar un teléfono válido", "", "warning");        return; }
+            if (id_pais     == "0" ) { window.Swal.fire("Favor de ingresar un país válido", "", "warning");           return; }
+            if (id_estado   == "0" ) { window.Swal.fire("Favor de ingresar un estado válido", "", "warning");         return; }
+            if (id_municipio== "0" ) { window.Swal.fire("Favor de ingresar una ciudad válida", "", "warning");        return; }
 
             const ObjectData = {
                 nombre      : nombre,
@@ -283,27 +278,31 @@ export default {
             try {
                 const response  = await axios.post('http://localhost:3000/proveedores', ObjectData);
                 this.placeholders = response.data;
-                alert("Registro guardado con éxito");
 
-                document.getElementById("txtProveedor").value       = "";
-                document.getElementById("txtRazonSocial").value     = "";
-                document.getElementById("txtRFC").value             = "";
-                document.getElementById("txtColonia").value         = "";
-                document.getElementById("txtCalle").value           = "";
-                document.getElementById("txtNumero").value          = "";
-                document.getElementById("txtExterior").value        = "";
-                document.getElementById("txtCP").value              = "";
-                document.getElementById("txtTelefono").value        = "";
-                document.getElementById("txtCorreo").value          = "";
-                document.getElementById("cboPais").value            = "0";
-                document.getElementById("cboEstado").value          = "0";
-                document.getElementById("cboCiudad").value          = "0";
+                window.Swal.fire({
+                    title: "Registro Agregado Correctamente",
+                    text: "",
+                    icon: "success"
+                }).then(() => {
+                    document.getElementById("txtProveedor").value       = "";
+                    document.getElementById("txtRazonSocial").value     = "";
+                    document.getElementById("txtRFC").value             = "";
+                    document.getElementById("txtColonia").value         = "";
+                    document.getElementById("txtCalle").value           = "";
+                    document.getElementById("txtNumero").value          = "";
+                    document.getElementById("txtExterior").value        = "";
+                    document.getElementById("txtCP").value              = "";
+                    document.getElementById("txtTelefono").value        = "";
+                    document.getElementById("txtCorreo").value          = "";
+                    document.getElementById("cboPais").value            = "0";
+                    document.getElementById("cboEstado").value          = "0";
+                    document.getElementById("cboCiudad").value          = "0";
 
-                this.btnRegresar();
-
+                    this.btnRegresar();
+                });
 
             } catch (error) {
-                alert("Hubo un error al enviar los datos: ", error);
+                window.Swal.fire("Hubo un error al enviar los datos: ", `${error}`, "error");
             }
         },
 
@@ -361,18 +360,18 @@ export default {
             let id_estado   = Number(document.getElementById("cboEstado").value);
             let id_municipio= Number(document.getElementById("cboCiudad").value);
             
-            if (nombre      == "" ) { alert("Favor de ingresar un proveedor válido");       return; }
-            if (razon_social== "" ) { alert("Favor de ingresar una razón social válida");   return; }
-            if (rfc         == "" ) { alert("Favor de ingresar una clave RFC válida");      return; }
-            if (colonia     == "" ) { alert("Favor de ingresar una colonia");               return; }
-            if (calle       == "" ) { alert("Favor de ingresar una calle valida");          return; }
-            if (num_int     == "" ) { alert("Favor de ingresar un número válido");          return; }
+            if (nombre      == "" ) { window.Swal.fire("Favor de ingresar un proveedor válido", "", "warning");       return; }
+            if (razon_social== "" ) { window.Swal.fire("Favor de ingresar una razón social válida", "", "warning");   return; }
+            if (rfc         == "" ) { window.Swal.fire("Favor de ingresar una clave RFC válida", "", "warning");      return; }
+            if (colonia     == "" ) { window.Swal.fire("Favor de ingresar una colonia", "", "warning");               return; }
+            if (calle       == "" ) { window.Swal.fire("Favor de ingresar una calle valida", "", "warning");          return; }
+            if (num_int     == "" ) { window.Swal.fire("Favor de ingresar un número válido", "", "warning");          return; }
             if (num_ext     == "" ) { num_ext = "";                                                 }
-            if (cod_p       == "" ) { alert("Favor de ingresar un código postal válido");   return; }
-            if (telefono    == "" ) { alert("Favor de ingresar un teléfono válido");        return; }
-            if (id_pais     == "0" ) { alert("Favor de ingresar un país válido");           return; }
-            if (id_estado   == "0" ) { alert("Favor de ingresar un estado válido");         return; }
-            if (id_municipio== "0" ) { alert("Favor de ingresar una ciudad válida");        return; }
+            if (cod_p       == "" ) { window.Swal.fire("Favor de ingresar un código postal válido", "", "warning");   return; }
+            if (telefono    == "" ) { window.Swal.fire("Favor de ingresar un teléfono válido", "", "warning");        return; }
+            if (id_pais     == "0" ) { window.Swal.fire("Favor de ingresar un país válido", "", "warning");           return; }
+            if (id_estado   == "0" ) { window.Swal.fire("Favor de ingresar un estado válido", "", "warning");         return; }
+            if (id_municipio== "0" ) { window.Swal.fire("Favor de ingresar una ciudad válida", "", "warning");        return; }
 
             const ObjectData = {
                 nombre      : nombre,
@@ -397,27 +396,31 @@ export default {
             try {
                 const response  = await axios.put('http://localhost:3000/proveedores/' + this.proveedor, ObjectData);
                 this.placeholders = response.data;
-                alert("Registro modificado con éxito");
-
-                document.getElementById("txtProveedor").value       = "";
-                document.getElementById("txtRazonSocial").value     = "";
-                document.getElementById("txtRFC").value             = "";
-                document.getElementById("txtColonia").value         = "";
-                document.getElementById("txtCalle").value           = "";
-                document.getElementById("txtNumero").value          = "";
-                document.getElementById("txtExterior").value        = "";
-                document.getElementById("txtCP").value              = "";
-                document.getElementById("txtTelefono").value        = "";
-                document.getElementById("txtCorreo").value          = "";
-                document.getElementById("cboPais").value            = "0";
-                document.getElementById("cboEstado").value          = "0";
-                document.getElementById("cboCiudad").value          = "0";
-
-                this.btnRegresar();
-
+                
+                window.Swal.fire({
+                    title: "Registro Actualizado Correctamente",
+                    text: "",
+                    icon: "success"
+                }).then(() => {
+                    document.getElementById("txtProveedor").value       = "";
+                    document.getElementById("txtRazonSocial").value     = "";
+                    document.getElementById("txtRFC").value             = "";
+                    document.getElementById("txtColonia").value         = "";
+                    document.getElementById("txtCalle").value           = "";
+                    document.getElementById("txtNumero").value          = "";
+                    document.getElementById("txtExterior").value        = "";
+                    document.getElementById("txtCP").value              = "";
+                    document.getElementById("txtTelefono").value        = "";
+                    document.getElementById("txtCorreo").value          = "";
+                    document.getElementById("cboPais").value            = "0";
+                    document.getElementById("cboEstado").value          = "0";
+                    document.getElementById("cboCiudad").value          = "0";
+    
+                    this.btnRegresar();
+                });
 
             } catch (error) {
-                alert("Hubo un error al enviar los datos: ", error);
+                window.Swal.fire("Hubo un error al enviar los datos: ", `${error}`, "error");
             }
         },
     },

@@ -96,14 +96,30 @@ export default {
             });
         },
         btnEliminar(idEmpleado){
-            var opcion = confirm("¿Dese eliminar este usuario?");
-            if (opcion == true) {
-                axios.delete(`http://localhost:3000/empleados/${idEmpleado}`).then((response) => {
-                    let confirm = response.data;
-                    console.log(confirm);
-                    this.getData();
-                });
-            }
+            
+            window.Swal.fire({
+                title: "¿Estás seguro?",
+                text: "¿Deseas eliminar este empleado?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Aceptar",
+                cancelButtonText: "Cancelar",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.delete(`http://localhost:3000/empleados/${idEmpleado}`).then((response) => {
+                        let confirm = response.data;
+                        console.log(confirm);
+                        this.getData();
+                    });
+                    window.Swal.fire(
+                        "Empleado Eliminado",
+                        "El empleado ha sido eliminado correctamente.",
+                        "success"
+                    );
+                }
+            });
         },
         btnEditar(value, id){
             console.log(id);

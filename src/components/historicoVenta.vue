@@ -3,11 +3,11 @@
         <!-- TEMPLATE PRINCIPAL -->
         <div>
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">Perfiles</h1>
-                <a class="d-none d-sm-inline-block btn btn-primary btn-lg shadow-sm" @click="templateDetail(1)">
+                <h1 class="h3 mb-0 text-gray-800">Ventas</h1>
+                <!-- <a class="d-none d-sm-inline-block btn btn-primary btn-lg shadow-sm" @click="templateDetail(1)">
                     <i class="bi bi-plus-square"></i>
                     Nuevo
-                </a>
+                </a> -->
             </div>
     
             <div class="card shadow mb-4">
@@ -20,20 +20,21 @@
                             <thead>
                                 <tr>
                                     <th>Id</th>
-                                    <th>Descripción</th>
+                                    <th>Empleado</th>
+                                    <th>Fecha de Venta</th>
+                                    <th>Total de Venta</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
-                            <tbody v-if="perfiles != null">
-                                <tr v-for="(item, index) of perfiles" :key="index">
+                            <tbody v-if="ventas != null">
+                                <tr v-for="(item, index) of ventas" :key="index">
                                     <td>{{item.id}}</td>
-                                    <td>{{item.descripcion}}</td>
+                                    <td>{{item.empleado}}</td>
+                                    <td>{{item.venta}}</td>
+                                    <td>$ {{returnMoney(item.total)}}</td>
                                     <td>
                                         <button type="button" class="btn btn-success" @click="btnEditar(1, item.id)">
-                                            <i class="bi bi-pencil-fill"></i> Editar
-                                        </button>
-                                        <button type="button" class="btn btn-danger" @click="btnEliminar(item.id)">
-                                            <i class="bi bi-trash-fill"></i> Eliminar
+                                            <i class="bi bi-view-list"></i> Ver
                                         </button>
                                     </td>
                                 </tr>
@@ -48,14 +49,14 @@
     
     <detailComponent v-else
         :Detailview="Detailview"
-        :perfil="perfil"
+        :venta="venta"
         @templateDetail="templateDetail"></detailComponent>
     
 </template>
 
 <script>
 
-import detailComponent from "./PerfilDetail.vue";
+import detailComponent from "./historicoDetalle.vue";
 import axios from 'axios';
 
 export default {
@@ -63,8 +64,8 @@ export default {
     data(){
         return{
             Detailview  : null,
-            perfil      : null,
-            perfiles    : [],
+            venta      : null,
+            ventas      : [],
 
         }
     },
@@ -75,6 +76,10 @@ export default {
         this.getData();
     },
     methods:{
+
+        returnMoney(total){
+            return Number(parseFloat(total)).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        },
         templateDetail(value){
             this.Detailview = value;
             this.perfil     = null;
@@ -82,44 +87,41 @@ export default {
         },
 
         getData(){
-            axios.get('http://localhost:3000/perfiles').then((response) => {
-                this.perfiles   = [];
+            axios.get('http://localhost:3000/ventas').then((response) => {
+                this.ventas     = [];
                 let arrayData   = response.data;
-                let perfiles    = this.perfiles;
+                let ventas      = [];
                 for (const key in arrayData) {
-                    perfiles.push(arrayData[key]);
+                    let id          = arrayData[key].id;
+                    let empleado    = arrayData[key].empleado;
+                    let venta       = arrayData[key].venta.split("T").reverse()[1];
+                    let total       = arrayData[key].total;
+
+                    let objectData = {
+                        "id": id,
+                        "empleado": empleado,
+                        "venta": venta,
+                        "total": total,
+                    };
+
+                    ventas[key] = objectData;
+
                 }
+                this.ventas = ventas;
             });
         },
         btnEliminar(idPerfil){
-
-            window.Swal.fire({
-                title: "¿Estás seguro?",
-                text: "¿Deseas eliminar este perfil?",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Aceptar",
-                cancelButtonText: "Cancelar",
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    axios.delete(`http://localhost:3000/perfiles/${idPerfil}`).then((response) => {
-                        let confirm = response.data;
-                        console.log(confirm);
-                        this.getData();
-                    });
-                    window.Swal.fire(
-                        "Perfil Eliminado",
-                        "El perfil ha sido eliminado correctamente.",
-                        "success"
-                    );
-                }
-            });
+            var opcion = confirm("¿Dese eliminar este usuario?");
+            if (opcion == true) {
+                axios.delete(`http://localhost:3000/perfiles/${idPerfil}`).then((response) => {
+                    let confirm = response.data;
+                    console.log(confirm);
+                    this.getData();
+                });
+            }
         },
         btnEditar(value, id){
-            console.log(id);
-            this.perfil   = id;
+            this.venta      = id;
             this.Detailview = value;
         },
     },
