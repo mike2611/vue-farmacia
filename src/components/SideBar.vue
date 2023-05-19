@@ -42,6 +42,7 @@
                     <a class="collapse-item" href="#" @click="pruebaTemplate(2)">Perfiles</a>
                     <a class="collapse-item" href="#" @click="pruebaTemplate(3)">Contratos</a>
                     <a class="collapse-item" href="#" @click="pruebaTemplate(4)">Proveedores</a>
+                    <a class="collapse-item" href="#" @click="pruebaTemplate(6)">Productos</a>
                 </div>
             </div>
         </li>
