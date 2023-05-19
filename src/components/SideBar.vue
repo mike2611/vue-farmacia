@@ -6,7 +6,7 @@
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-laugh-wink"></i>
             </div>
-            <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+            <div class="sidebar-brand-text mx-3 big-font">FarmaFácil</div>
         </a>
 
         <!-- Divider -->
@@ -16,16 +16,11 @@
         <li class="nav-item active">
             <a class="nav-link" href="index.html">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>FarmaFacil</span></a>
+                <p class="medium-font">Dashboard</p></a>
         </li>
 
         <!-- Divider -->
         <hr class="sidebar-divider">
-
-        <!-- Heading -->
-        <div class="sidebar-heading">
-            Administraci&oacute;n
-        </div>
 
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
@@ -33,16 +28,16 @@
                 aria-expanded="true" aria-controls="collapseTwo">
                 <!-- <i class="fas fa-fw fa-cog"></i> -->
                 <i class="bi bi-gear"></i>
-                <span>Opciones</span>
+                <p class="medium-font">Opciones</p>
             </a>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <!-- <h6 class="collapse-header">Custom Components:</h6> -->
-                    <a class="collapse-item" href="#" @click="pruebaTemplate(1)">Empleados</a>
-                    <a class="collapse-item" href="#" @click="pruebaTemplate(2)">Perfiles</a>
-                    <a class="collapse-item" href="#" @click="pruebaTemplate(3)">Contratos</a>
-                    <a class="collapse-item" href="#" @click="pruebaTemplate(4)">Proveedores</a>
-                    <a class="collapse-item" href="#" @click="pruebaTemplate(6)">Productos</a>
+                    <a class="collapse-item small-font" href="#" @click="pruebaTemplate(1)">Empleados</a>
+                    <a class="collapse-item small-font" href="#" @click="pruebaTemplate(2)">Perfiles</a>
+                    <a class="collapse-item small-font" href="#" @click="pruebaTemplate(3)">Contratos</a>
+                    <a class="collapse-item small-font" href="#" @click="pruebaTemplate(4)">Proveedores</a>
+                    <a class="collapse-item small-font" href="#" @click="pruebaTemplate(6)">Productos</a>
                 </div>
             </div>
         </li>
@@ -53,7 +48,7 @@
                 aria-expanded="true" aria-controls="collapseUtilities">
                 <!-- <i class="fas fa-fw fa-wrench"></i> -->
                 <i class="bi bi-key"></i>
-                <span>Punto de Venta</span>
+                <p class="medium-font">Punto de Venta</p>
             </a>
             <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
@@ -61,8 +56,9 @@
                     <!-- <a class="collapse-item" href="utilities-border.html">
                         <router-link to="/puntoVenta">Punto de Venta</router-link>
                     </a> -->
-                    <a class="collapse-item" href="#" @click="pruebaTemplate(5)">Punto de Venta</a>
-                    <a class="collapse-item" href="#" @click="pruebaTemplate(7)">Historial de Ventas</a>
+
+                    <a class="collapse-item small-font" href="#" @click="pruebaTemplate(5)">Punto de Venta</a>
+                    <a class="collapse-item small-font" href="#" @click="pruebaTemplate(7)">Historial de Ventas</a>
                 </div>
             </div>
         </li>
@@ -70,13 +66,9 @@
         <!-- Divider -->
         <hr class="sidebar-divider">
 
-
-        <!-- Divider -->
-        <hr class="sidebar-divider d-none d-md-block">
-
         <!-- Sidebar Toggler (Sidebar) -->
         <div class="text-center d-none d-md-inline">
-            <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            <p> FarmaFacíl&copy; 2023</p>
         </div>
 
     </ul>
@@ -91,6 +83,25 @@ export default {
     }
 };
 </script>
+
+<style>
+   
+    .big-font {
+        font-size: 1.7rem;
+        font-weight: bolder;
+    }
+
+    .medium-font {
+        font-size: 1.2rem;
+        font-weight: bolder;
+    }
+
+    .small-font {
+        font-size: 1rem;
+        font-weight: 900;
+    }
+
+</style>
 
 <!-- <style scoped>
 </style> -->
