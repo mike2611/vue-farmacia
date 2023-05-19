@@ -32,8 +32,8 @@
   
             <div class="form-row">
               <div class="form-group col-md-12">
-                <label for="txtDescripcion">Descripción:</label>
-                <textarea class="form-control" id="txtDescripcion" rows="3" v-model="descripcion"></textarea>
+                <label for="txtDescripcion">Presentación del producto:</label>
+                <textarea class="form-control" id="txtDescripcion" rows="2" v-model="descripcion"></textarea>
               </div>
             </div>
   
@@ -111,23 +111,33 @@
         const precioVenta = Number(document.getElementById('txtPrecioVenta').value);
   
         if (idContrato === 0) {
-          alert('Favor de seleccionar un contrato válido');
+            window.Swal.fire(
+                "Favor de seleccionar un contrato válido",
+            )
           return;
         }
         if (nombre === '') {
-          alert('Favor de ingresar un nombre válido');
+            window.Swal.fire(
+                "Favor de ingresar un nombre válido",
+            )
           return;
         }
         if (descripcion === '') {
-          alert('Favor de ingresar una descripción válida');
+            window.Swal.fire(
+                "Favor de ingresar una descripción válida",
+            )
           return;
         }
         if (stock === '') {
-          alert('Favor de ingresar un stock válido');
+            window.Swal.fire(
+                "Favor de ingresar un stock válido",
+            )
           return;
         }
         if (precioVenta === '') {
-          alert('Favor de ingresar un precio de venta válido');
+            window.Swal.fire(
+                "Favor de ingresar un precio de venta válido",
+            )
           return;
         }
   
@@ -142,14 +152,19 @@
         axios.post('http://localhost:3000/productos', ObjectData)
           .then((response) => {
             console.log('Response:', response.data);
-            alert('Registro guardado con éxito');
-  
+            window.Swal.fire(
+                "Registro guardado con éxito",
+                "Se guardó con éxito",
+                "success"
+            )  
             this.resetForm();
             this.btnRegresar();
           })
           .catch((error) => {
             console.log('Error:', error);
-            alert('Hubo un error al enviar los datos');
+            window.Swal.fire(
+                "Hubo un error al enviar los datos",
+            )  
           });
       },
       getProductoIdData() {
@@ -179,25 +194,36 @@
         const precioVenta = Number(document.getElementById('txtPrecioVenta').value);
   
         if (idContrato === 0) {
-          alert('Favor de seleccionar un contrato válido');
+            window.Swal.fire(
+                "Favor de seleccionar un contrato válido",
+            )
           return;
         }
         if (nombre === '') {
-          alert('Favor de ingresar un nombre válido');
+            window.Swal.fire(
+                "Favor de ingresar un nombre válido",
+            )
           return;
         }
         if (descripcion === '') {
-          alert('Favor de ingresar una descripción válida');
+            window.Swal.fire(
+                "Favor de ingresar una descripción válida",
+            )
           return;
         }
         if (stock === '') {
-          alert('Favor de ingresar un stock válido');
+            window.Swal.fire(
+                "Favor de ingresar un stock válido",
+            )
           return;
         }
         if (precioVenta === '') {
-          alert('Favor de ingresar un precio de venta válido');
+            window.Swal.fire(
+                "Favor de ingresar un precio de venta válido",
+            )
           return;
         }
+  
   
         const ObjectData = {
           nombre,
@@ -210,14 +236,19 @@
         axios.put(`http://localhost:3000/productos/${this.producto}`, ObjectData)
           .then((response) => {
             console.log('Response:', response.data);
-            alert('Registro actualizado con éxito');
-  
+            window.Swal.fire(
+                "Registro actualizado con éxito",
+                "Se guardó con éxito",
+                "success"
+            );
             this.resetForm();
             this.btnRegresar();
           })
           .catch((error) => {
             console.log('Error:', error);
-            alert('Hubo un error al enviar los datos');
+            window.Swal.fire(
+                "Hubo un error al enviar los datos",
+            );
           });
       },
       resetForm() {

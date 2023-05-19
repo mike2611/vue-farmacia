@@ -20,7 +20,7 @@
                 <tr>
                   <th>Id</th>
                   <th>Nombre</th>
-                  <th>Descripción</th>
+                  <th>Presentación del Producto</th>
                   <th>Stock</th>
                   <th>Precio de Venta</th>
                   <th>Acciones</th>
