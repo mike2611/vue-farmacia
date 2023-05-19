@@ -19,63 +19,28 @@
                         <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>Descripci&oacute;n</th>
+                                <th>Clave del Contrato</th>
                                 <th>Monto</th>
                                 <th>Inicio</th>
                                 <th>Termino</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
-                        <tfoot>
-                            <tr>
-                                <th>Id</th>
-                                <th>Descripci&oacute;n</th>
-                                <th>Monto</th>
-                                <th>Inicio</th>
-                                <th>Termino</th>
-                            </tr>
-                        </tfoot>
                         <tbody>
-                            <tr>
-                                <td>001</td>
-                                <td>Ferreteria</td>
-                                <td>$ 1,000,000 MX</td>
-                                <td>01/01/2023</td>
-                                <td>01/01/2024</td>
-                            </tr>
-                            <tr>
-                                <td>002</td>
-                                <td>Qu&iacute;micos</td>
-                                <td>$ 2,000,000 MX</td>
-                                <td>01/01/2023</td>
-                                <td>01/01/2024</td>
-                            </tr>
-                            <tr>
-                                <td>003</td>
-                                <td>Plomeria</td>
-                                <td>$ 500,000 MX</td>
-                                <td>01/01/2023</td>
-                                <td>01/01/2024</td>
-                            </tr>
-                            <tr>
-                                <td>004</td>
-                                <td>EQ. M&eacute;dico A</td>
-                                <td>$ 1,000,000 MX</td>
-                                <td>01/01/2023</td>
-                                <td>01/01/2024</td>
-                            </tr>
-                            <tr>
-                                <td>005</td>
-                                <td>EQ. M&eacute;dico B</td>
-                                <td>$ 1,000,000 MX</td>
-                                <td>01/01/2023</td>
-                                <td>01/01/2024</td>
-                            </tr>
-                            <tr>
-                                <td>006</td>
-                                <td>Electricidad</td>
-                                <td>$ 6,000,000 MX</td>
-                                <td>01/01/2023</td>
-                                <td>01/01/2024</td>
+                            <tr v-for="(item, index) of contratos" :key="index">
+                                <td>{{item.id}}</td>
+                                <td>{{item.claveContrato}}</td>
+                                <td>{{item.monto}}</td>
+                                <td>{{item.inicio}}</td>
+                                <td>{{item.vigencia}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-success" @click="btnEditar(1, item.id)">
+                                        <i class="bi bi-pencil-fill"></i> Editar
+                                    </button>
+                                    <button type="button" class="btn btn-danger" @click="btnEliminar(item.id)">
+                                        <i class="bi bi-trash-fill"></i> Eliminar
+                                    </button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -87,26 +52,77 @@
     <!-- TEMPLATE DETAIL -->
     <detailComponent v-else
         :Detailview="Detailview"
+        :contrato="contrato"
         @templateDetail="templateDetail"></detailComponent>
 </template>
 
 <script>
 
 import detailComponent from "./ContratosDetail.vue";
+import axios from 'axios';
 
 export default {
     name: "UsuariosModule",
     data(){
         return{
-            Detailview: null,
+            Detailview  : null,
+            contratos   : [],
+            contrato    : null
         }
+    },
+    created(){
+        this.getData();
     },
     components: {
         detailComponent,
     },
     methods:{
         templateDetail(value){
+            this.Detailview = value;
+            this.contrato   = null;
+            this.getData();
+        },
 
+        getData(){
+            axios.get('http://localhost:3000/contratos').then((response) => {
+                this.contratos  = [];
+                let arrayData   = response.data;
+                let araryContr  = [];
+                // let contratos   = this.contratos;
+                
+                for (const key in arrayData) {
+                    let id              = arrayData[key].id;
+                    let claveContrato   = arrayData[key].clave_contrato;
+                    let monto           = Number(parseFloat(arrayData[key].monto)).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+                    let inicio          = arrayData[key].inicio.split("T").reverse()[1];
+                    let vigencia        = arrayData[key].vigencia.split("T").reverse()[1];
+
+                    let objectData = {
+                        "id": id,
+                        "claveContrato": claveContrato,
+                        "monto": monto,
+                        "inicio": inicio,
+                        "vigencia": vigencia
+                    };
+                    araryContr[key] = objectData;
+                }
+
+                this.contratos = araryContr;                
+            });
+        },
+
+        btnEliminar(idProveedor){
+            var opcion = confirm("¿Dese eliminar este contrato?");
+            if (opcion == true) {
+                axios.delete(`http://localhost:3000/contratos/${idProveedor}`).then((response) => {
+                    console.log(response.data);
+                    this.getData();
+                });
+            }
+        },
+
+        btnEditar(value, id){
+            this.contrato   = id;
             this.Detailview = value;
         },
     },
