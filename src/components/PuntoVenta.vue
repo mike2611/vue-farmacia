@@ -267,7 +267,7 @@ export default {
       productosDescuentos.forEach(producto => {
         descuento += producto.precio_venta * 0.2 * producto.cantidad;
       })
-      return descuento ? descuento : 0;
+      return descuento;
     },
     añadirProducto() {
       if (this.selectedProductIndex !== null && this.selectedProductQuantity > 0) {
@@ -280,7 +280,7 @@ export default {
           cantidad: this.selectedProductQuantity,
         });
         this.subtotal += this.selectedProductQuantity * producto.precio_venta;
-        this.descuentos += this.aplicarDescuento();
+        this.descuentos = this.aplicarDescuento();
         this.iva = (this.subtotal - this.descuentos) * 0.16;
         this.total = this.subtotal - this.descuentos + this.iva;
 
