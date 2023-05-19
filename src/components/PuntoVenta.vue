@@ -244,7 +244,8 @@ export default {
       axios.get('http://localhost:3000/productos')
         .then(response => {
           console.log(response.data);
-          this.productos = response.data;
+          let filtroProductos = response.data;
+          this.productos = filtroProductos.filter((producto) => producto.stock > 0);
         })
         .catch(error => {
           console.error(error);
