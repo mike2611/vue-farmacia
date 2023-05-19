@@ -12,6 +12,7 @@
                     <PerfilModule  v-if="mainView == 2"></PerfilModule>
                     <ContModule  v-if="mainView == 3"></ContModule>
                     <ProvModule  v-if="mainView == 4"></ProvModule>
+                    <ProductosModule v-if="mainView == 6"></ProductosModule>
                     <!-- PUNTO DE VENTAS DROPDOWN -->
                     <puntoVenta  v-if="mainView == 5"></puntoVenta>
                 </div>
@@ -35,6 +36,7 @@ import UserModule from "./UsuariosModule.vue";
 import PerfilModule from "./PerfilModule.vue";
 import ContModule from "./ContratosModule.vue";
 import ProvModule from "./ProvModule.vue";
+import ProductosModule from "./ProductosModule.vue";
 // MANU DE PUNTO DE VENTA //
 import puntoVenta from "./PuntoVenta.vue";
 
@@ -54,6 +56,7 @@ export default {
         PerfilModule,
         ContModule,
         ProvModule,
+        ProductosModule,
         // PUNTO DE VENTA
         puntoVenta,
     },
