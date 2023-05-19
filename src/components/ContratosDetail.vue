@@ -121,12 +121,12 @@ export default {
             let vigencia        = document.getElementById("txtTermino").value;
             let clave_contrato  = document.getElementById("txtContrato").value;
 
-            if( id_proveedor    == 0 ) { alert("Favor de seleccionar un proveedor válido");         return; }
-            if( descripcion     == "") { alert("Favor de ingresar una descripción válido");         return; }
-            if( monto           == "") { alert("Favor de ingresar un monto válido");                return; }
-            if( inicio          == "") { alert("Favor de ingresar una fecha de inicio válida");     return; }
-            if( vigencia        == "") { alert("Favor de ingresar una fecha de termino válida");    return; }
-            if( clave_contrato  == "") { alert("Favor de ingresar una clave de contrato válida");   return; }
+            if( id_proveedor    == 0 ) { window.Swal.fire("Favor de seleccionar un proveedor válido", "", "warning");         return; }
+            if( descripcion     == "") { window.Swal.fire("Favor de ingresar una descripción válido", "", "warning");         return; }
+            if( monto           == "") { window.Swal.fire("Favor de ingresar un monto válido", "", "warning");                return; }
+            if( inicio          == "") { window.Swal.fire("Favor de ingresar una fecha de inicio válida", "", "warning");     return; }
+            if( vigencia        == "") { window.Swal.fire("Favor de ingresar una fecha de termino válida", "", "warning");    return; }
+            if( clave_contrato  == "") { window.Swal.fire("Favor de ingresar una clave de contrato válida", "", "warning");   return; }
 
 
             let ObjectData = {
@@ -143,20 +143,24 @@ export default {
             try {
                 const response  = await axios.post('http://localhost:3000/contratos', ObjectData);
                 this.placeholders = response.data;
-                alert("Registro guardado con éxito");
 
-                document.getElementById("cboProveedor").value       = "0";
-                document.getElementById("txtContrato").value        = "";
-                document.getElementById("txtDescripcion").value     = "";
-                document.getElementById("txtMonto").value           = "";
-                document.getElementById("txtInicio").value          = "";
-                document.getElementById("txtTermino").value         = "";
-
-                this.btnRegresar();
-
+                window.Swal.fire({
+                    title: "Registro Agregado Correctamente",
+                    text: "",
+                    icon: "success"
+                }).then(() => {
+                    document.getElementById("cboProveedor").value       = "0";
+                    document.getElementById("txtContrato").value        = "";
+                    document.getElementById("txtDescripcion").value     = "";
+                    document.getElementById("txtMonto").value           = "";
+                    document.getElementById("txtInicio").value          = "";
+                    document.getElementById("txtTermino").value         = "";
+    
+                    this.btnRegresar();
+                });
 
             } catch (error) {
-                alert("Hubo un error al enviar los datos: ", error);
+                window.Swal.fire("Hubo un error al enviar los datos: ", `${error}`, "error");
             }
         },
         // PARA MODIFICAR //
@@ -189,12 +193,12 @@ export default {
             let vigencia        = document.getElementById("txtTermino").value;
             let clave_contrato  = document.getElementById("txtContrato").value;
 
-            if( id_proveedor    == 0 ) { alert("Favor de seleccionar un proveedor válido");         return; }
-            if( descripcion     == "") { alert("Favor de ingresar una descripción válido");         return; }
-            if( monto           == "") { alert("Favor de ingresar un monto válido");                return; }
-            if( inicio          == "") { alert("Favor de ingresar una fecha de inicio válida");     return; }
-            if( vigencia        == "") { alert("Favor de ingresar una fecha de termino válida");    return; }
-            if( clave_contrato  == "") { alert("Favor de ingresar una clave de contrato válida");   return; }
+            if( id_proveedor    == 0 ) { window.Swal.fire("Favor de seleccionar un proveedor válido", "", "warning");         return; }
+            if( descripcion     == "") { window.Swal.fire("Favor de ingresar una descripción válido", "", "warning");         return; }
+            if( monto           == "") { window.Swal.fire("Favor de ingresar un monto válido", "", "warning");                return; }
+            if( inicio          == "") { window.Swal.fire("Favor de ingresar una fecha de inicio válida", "", "warning");     return; }
+            if( vigencia        == "") { window.Swal.fire("Favor de ingresar una fecha de termino válida", "", "warning");    return; }
+            if( clave_contrato  == "") { window.Swal.fire("Favor de ingresar una clave de contrato válida", "", "warning");   return; }
 
 
             let ObjectData = {
@@ -211,17 +215,21 @@ export default {
             try {
                 const response  = await axios.put('http://localhost:3000/contratos/' + this.contrato, ObjectData);
                 this.placeholders = response.data;
-                alert("Registro actualizado con éxito");
 
-                document.getElementById("cboProveedor").value       = "0";
-                document.getElementById("txtContrato").value        = "";
-                document.getElementById("txtDescripcion").value     = "";
-                document.getElementById("txtMonto").value           = "";
-                document.getElementById("txtInicio").value          = "";
-                document.getElementById("txtTermino").value         = "";
-
-                this.btnRegresar();
-
+                window.Swal.fire({
+                    title: "Registro Actualizado Correctamente",
+                    text: "",
+                    icon: "success"
+                }).then(() => {
+                    document.getElementById("cboProveedor").value       = "0";
+                    document.getElementById("txtContrato").value        = "";
+                    document.getElementById("txtDescripcion").value     = "";
+                    document.getElementById("txtMonto").value           = "";
+                    document.getElementById("txtInicio").value          = "";
+                    document.getElementById("txtTermino").value         = "";
+    
+                    this.btnRegresar();
+                });
 
             } catch (error) {
                 alert("Hubo un error al enviar los datos: ", error);

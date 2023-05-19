@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Información del Usuario</h1>
+            <h1 class="h3 mb-0 text-gray-800">Información del Empleado</h1>
             <a class="d-none d-sm-inline-block btn btn-danger btn-lg shadow-sm" @click="btnRegresar()">
                 <i class="bi bi-backspace"></i>
                 Regresar
@@ -131,13 +131,13 @@ export default {
             let usuario     = document.getElementById("txtUsuario").value;
             let clave       = document.getElementById("txtClave").value;
 
-            if( id_perfil   == 0 ) { alert("Favor de seleccionar un perfil válido");        return; }
-            if( nombre      == "") { alert("Favor de ingresar un nombre válido");           return; }
-            if( paterno     == "") { alert("Favor de ingresar un apellido paterno válido"); return; }
-            if( materno     == "") { alert("Favor de ingresar un apellido materno válido"); return; }
-            if( edad        == "") { alert("Favor de ingresar una edad válida");            return; }
-            if( usuario     == "") { alert("Favor de ingresar un usuario válido");          return; }
-            if( clave       == "") { alert("Favor de ingresar una clave válido");           return; }
+            if( id_perfil   == 0 ) { window.Swal.fire("Favor de seleccionar un perfil válido", "", "warning");        return; }
+            if( nombre      == "") { window.Swal.fire("Favor de ingresar un nombre válido", "", "warning");           return; }
+            if( paterno     == "") { window.Swal.fire("Favor de ingresar un apellido paterno válido", "", "warning"); return; }
+            if( materno     == "") { window.Swal.fire("Favor de ingresar un apellido materno válido", "", "warning"); return; }
+            if( edad        == "") { window.Swal.fire("Favor de ingresar una edad válida", "", "warning");            return; }
+            if( usuario     == "") { window.Swal.fire("Favor de ingresar un usuario válido", "", "warning");          return; }
+            if( clave       == "") { window.Swal.fire("Favor de ingresar una clave válido", "", "warning");           return; }
 
             const ObjectData = {
                 id_perfil   : id_perfil,
@@ -152,19 +152,25 @@ export default {
             try {
                 const response  = await axios.post('http://localhost:3000/empleados', ObjectData);
                 this.Usuarios   = response.data;
-                alert("Envio correcto");
 
-                document.getElementById("cboPerfil").value  = "0";
-                document.getElementById("txtNombre").value  = "";
-                document.getElementById("txtPaterno").value = "";
-                document.getElementById("txtMaterno").value = "";
-                document.getElementById("txtEdad").value    = "";
-                document.getElementById("txtUsuario").value = "";
-                document.getElementById("txtClave").value   = "";
+                window.Swal.fire({
+                    title: "Registro Agregado Correctamente",
+                    text: "",
+                    icon: "success"
+                }).then(() => {
+                    document.getElementById("cboPerfil").value  = "0";
+                    document.getElementById("txtNombre").value  = "";
+                    document.getElementById("txtPaterno").value = "";
+                    document.getElementById("txtMaterno").value = "";
+                    document.getElementById("txtEdad").value    = "";
+                    document.getElementById("txtUsuario").value = "";
+                    document.getElementById("txtClave").value   = "";
+                    this.btnRegresar();
 
+                });
 
             } catch (error) {
-                alert("Hubo un error al enviar los datos: ", error);
+                window.Swal.fire("Hubo un error al enviar los datos: ", `${error}`, "error");
             }
 
         },
@@ -194,13 +200,13 @@ export default {
             let usuario     = document.getElementById("txtUsuario").value;
             let clave       = document.getElementById("txtClave").value;
 
-            if( id_perfil   == 0 ) { alert("Favor de seleccionar un perfil válido");        return; }
-            if( nombre      == "") { alert("Favor de ingresar un nombre válido");           return; }
-            if( paterno     == "") { alert("Favor de ingresar un apellido paterno válido"); return; }
-            if( materno     == "") { alert("Favor de ingresar un apellido materno válido"); return; }
-            if( edad        == "") { alert("Favor de ingresar una edad válida");            return; }
-            if( usuario     == "") { alert("Favor de ingresar un usuario válido");          return; }
-            if( clave       == "") { alert("Favor de ingresar una clave válido");           return; }
+            if( id_perfil   == 0 ) { window.Swal.fire("Favor de seleccionar un perfil válido", "", "warning");        return; }
+            if( nombre      == "") { window.Swal.fire("Favor de ingresar un nombre válido", "", "warning");           return; }
+            if( paterno     == "") { window.Swal.fire("Favor de ingresar un apellido paterno válido", "", "warning"); return; }
+            if( materno     == "") { window.Swal.fire("Favor de ingresar un apellido materno válido", "", "warning"); return; }
+            if( edad        == "") { window.Swal.fire("Favor de ingresar una edad válida", "", "warning");            return; }
+            if( usuario     == "") { window.Swal.fire("Favor de ingresar un usuario válido", "", "warning");          return; }
+            if( clave       == "") { window.Swal.fire("Favor de ingresar una clave válido", "", "warning");           return; }
 
             const ObjectData = {
                 id_perfil   : id_perfil,
@@ -215,21 +221,25 @@ export default {
             try {
                 const response  = await axios.put('http://localhost:3000/empleados/' + this.empleado, ObjectData);
                 this.Usuarios   = response.data;
-                alert("Envio correcto");
 
-                document.getElementById("cboPerfil").value  = "0";
-                document.getElementById("txtNombre").value  = "";
-                document.getElementById("txtPaterno").value = "";
-                document.getElementById("txtMaterno").value = "";
-                document.getElementById("txtEdad").value    = "";
-                document.getElementById("txtUsuario").value = "";
-                document.getElementById("txtClave").value   = "";
+                window.Swal.fire({
+                    title: "Registro Actualizado Correctamente",
+                    text: "",
+                    icon: "success"
+                }).then(() => {
+                    document.getElementById("cboPerfil").value  = "0";
+                    document.getElementById("txtNombre").value  = "";
+                    document.getElementById("txtPaterno").value = "";
+                    document.getElementById("txtMaterno").value = "";
+                    document.getElementById("txtEdad").value    = "";
+                    document.getElementById("txtUsuario").value = "";
+                    document.getElementById("txtClave").value   = "";
+                    
+                    this.btnRegresar();
 
-                this.btnRegresar();
-
-
+                });
             } catch (error) {
-                alert("Hubo un error al enviar los datos: ", error);
+                window.Swal.fire("Hubo un error al enviar los datos: ", `${error}`, "error");
             }
         },
         capitalize() {

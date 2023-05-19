@@ -112,13 +112,29 @@ export default {
         },
 
         btnEliminar(idProveedor){
-            var opcion = confirm("¿Dese eliminar este contrato?");
-            if (opcion == true) {
-                axios.delete(`http://localhost:3000/contratos/${idProveedor}`).then((response) => {
-                    console.log(response.data);
-                    this.getData();
-                });
-            }
+            window.Swal.fire({
+                title: "¿Estás seguro?",
+                text: "¿Deseas eliminar este contrato?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Aceptar",
+                cancelButtonText: "Cancelar",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.delete(`http://localhost:3000/contratos/${idProveedor}`).then((response) => {
+                        console.log(response.data);
+                        this.getData();
+                    });
+
+                    window.Swal.fire(
+                        "Perfil Eliminado",
+                        "El perfil ha sido eliminado correctamente.",
+                        "success"
+                    );
+                }
+            });
         },
 
         btnEditar(value, id){

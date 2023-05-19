@@ -57,7 +57,7 @@ export default {
 
         async fnGuardar(){
             let descripcion  = document.getElementById("txtDescripcion").value;
-            if( descripcion  == "" ) { alert("Favor de ingresar una descripción válida"); return; }
+            if( descripcion  == "" ) { window.Swal.fire("Favor de ingresar una descripción válida", "", "warning"); return; }
 
             const ObjectData = {
                 descripcion: descripcion,
@@ -66,9 +66,18 @@ export default {
             try {
                 const response = await axios.post('http://localhost:3000/perfiles', ObjectData);
                 this.placeholders = response.data;
-                alert("Envio correcto");
+                
+                window.Swal.fire({
+                    title: "Registro Agregado Correctamente",
+                    text: "",
+                    icon: "success"
+                }).then(() => {
+                    document.getElementById("txtDescripcion").value  = "";
+                    this.btnRegresar();
+                });
+                
             } catch (error) {
-                alert("Hubo un error al enviar los datos: ", error);
+                window.Swal.fire("Hubo un error al enviar los datos: ", `${error}`, "error");
             }
         },
 
@@ -88,7 +97,7 @@ export default {
         },
         async fnModificar() {
             let descripcion  = document.getElementById("txtDescripcion").value;
-            if( descripcion  == "" ) { alert("Favor de ingresar una descripción válida"); return; }
+            if( descripcion  == "" ) { window.Swal.fire("Favor de ingresar una descripción válida", "", "warning"); return; }
 
             const ObjectData = {
                 descripcion   : descripcion,
@@ -98,12 +107,18 @@ export default {
                 const response  = await axios.put('http://localhost:3000/perfiles/' + this.perfil, ObjectData);
                 let result = response.data;
                 console.log(result);
-                alert("Datos modificados correctamente");
-                document.getElementById("txtDescripcion").value  = "0";
-                this.btnRegresar();
+
+                window.Swal.fire({
+                    title: "Registro Actualizado Correctamente",
+                    text: "",
+                    icon: "success"
+                }).then(() => {
+                    document.getElementById("txtDescripcion").value  = "0";
+                    this.btnRegresar();
+                });
 
             } catch (error) {
-                alert("Hubo un error al enviar los datos: ", error);
+                window.Swal.fire("Hubo un error al enviar los datos: ", `${error}`, "error");
             }
         },
     },

@@ -93,13 +93,29 @@ export default {
             });
         },
         btnEliminar(idProveedor){
-            var opcion = confirm("¿Dese eliminar este usuario?");
-            if (opcion == true) {
-                axios.delete(`http://localhost:3000/proveedores/${idProveedor}`).then((response) => {
-                    console.log(response.data);
-                    this.getData();
-                });
-            }
+            window.Swal.fire({
+                title: "¿Estás seguro?",
+                text: "¿Deseas eliminar este proveedor?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Aceptar",
+                cancelButtonText: "Cancelar",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.delete(`http://localhost:3000/proveedores/${idProveedor}`).then((response) => {
+                        console.log(response.data);
+                        this.getData();
+                    });
+
+                    window.Swal.fire(
+                        "Proveedor Eliminado",
+                        "El proveedor ha sido eliminado correctamente.",
+                        "success"
+                    );
+                }
+            });
         },
         btnEditar(value, id){
             this.proveedor  = id;

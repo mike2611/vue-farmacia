@@ -62,7 +62,7 @@
                         <router-link to="/puntoVenta">Punto de Venta</router-link>
                     </a> -->
                     <a class="collapse-item" href="#" @click="pruebaTemplate(5)">Punto de Venta</a>
-                    <a class="collapse-item" href="#" @click="pruebaTemplate(0)">Historial de Ventas</a>
+                    <a class="collapse-item" href="#" @click="pruebaTemplate(7)">Historial de Ventas</a>
                 </div>
             </div>
         </li>
