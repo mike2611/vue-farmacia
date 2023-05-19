@@ -92,22 +92,33 @@
       },
   
       btnEliminar(producto) {
-        var opcion = confirm("¿Desea eliminar este producto?");
-        if (opcion) {
-          const ObjectData = {
-            stock: 0,
-          };
-  
-          axios
-            .put(`http://localhost:3000/productos/${producto.id}`, ObjectData)
-            .then((response) => {
-              console.log(response.data);
-              this.productos = this.productos.filter((item) => item.id !== producto.id);
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        }
+        window.Swal.fire({
+          title: "¿Estás seguro?",
+          text: "¿Desea eliminar este producto?",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Aceptar",
+          cancelButtonText: "Cancelar",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            const ObjectData = {
+              stock: 0,
+            };
+
+            axios.put(`http://localhost:3000/productos/${producto.id}`, ObjectData)
+              .then((response) => {
+                console.log(response.data);
+                this.productos = this.productos.filter((item) => item.id !== producto.id);
+              })
+              .catch((error) => {
+                console.error(error);
+              });
+          } else {
+            window.Swal.fire("Operación cancelada");
+          }
+        });
       },
   
       btnEditar(value, id) {
