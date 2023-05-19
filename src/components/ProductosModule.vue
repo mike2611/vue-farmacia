@@ -37,7 +37,7 @@
                     <button type="button" class="btn btn-success" @click="btnEditar(1, item.id)">
                       <i class="bi bi-pencil-fill"></i> Editar
                     </button>
-                    <button type="button" class="btn btn-danger" @click="btnEliminar(item.id)">
+                    <button v-if="item.stock > 0" type="button" class="btn btn-danger" @click="btnEliminar(item)">
                       <i class="bi bi-trash-fill"></i> Eliminar
                     </button>
                   </td>
@@ -50,11 +50,11 @@
     </div>
   
     <!-- TEMPLATE DETAIL -->
-    <detailComponent v-else :Detailview="Detailview" :contrato="contrato" @templateDetail="templateDetail"></detailComponent>
+    <detailComponent v-else :Detailview="Detailview" :producto="producto" @templateDetail="templateDetail"></detailComponent>
   </template>
   
   <script>
-  import detailComponent from "./ContratosDetail.vue";
+  import detailComponent from './ProductosDetail.vue';
   import axios from "axios";
   
   export default {
@@ -63,7 +63,7 @@
       return {
         Detailview: null,
         productos: [],
-        contrato: null,
+        producto: null,
       };
     },
     created() {
@@ -75,29 +75,34 @@
     methods: {
       templateDetail(value) {
         this.Detailview = value;
-        this.contrato = null;
+        this.producto = null;
         this.getData();
       },
   
       getData() {
         axios
-          .get("http://localhost:3000/productos")
+          .get("http://localhost:3000/productos?stock_gte=1")
           .then((response) => {
-            this.productos = response.data;
+            let filtroProductos = response.data;
+            this.productos = filtroProductos.filter((producto) => producto.stock > 0);
           })
           .catch((error) => {
             console.error(error);
           });
       },
   
-      btnEliminar(idProducto) {
+      btnEliminar(producto) {
         var opcion = confirm("¿Desea eliminar este producto?");
         if (opcion) {
+          const ObjectData = {
+            stock: 0,
+          };
+  
           axios
-            .delete(`http://localhost:3000/productos/${idProducto}`)
+            .put(`http://localhost:3000/productos/${producto.id}`, ObjectData)
             .then((response) => {
               console.log(response.data);
-              this.getData();
+              this.productos = this.productos.filter((item) => item.id !== producto.id);
             })
             .catch((error) => {
               console.error(error);
@@ -106,7 +111,7 @@
       },
   
       btnEditar(value, id) {
-        this.contrato = id;
+        this.producto = id;
         this.Detailview = value;
       },
     },
