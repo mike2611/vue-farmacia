@@ -227,6 +227,7 @@ export default {
             });
         },
 
+        // FUNCIONES CRUD //
         async fnGuardar(){
             let nombre      = document.getElementById("txtProveedor").value;
             let razon_social= document.getElementById("txtRazonSocial").value;
