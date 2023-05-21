@@ -237,6 +237,13 @@ export default {
           console.error(error);
         });
     },
+    limpiarCampos(){
+      this.subtotal = 0;
+      this.descuentos = 0;
+      this.iva = 0;
+      this.total = 0;
+      this.cuenta = [];
+    },
     selectProduct(producto, index) {
       this.selectedProductIndex = index;
       this.selectedProductPrice = producto.precio_venta;
@@ -304,7 +311,7 @@ export default {
       };
 
       pdfMake.createPdf(docDefinition).open();
-      this.cuenta = [];
+      this.limpiarCampos();
       this.fetchProductos();
     },
     vaciarCuenta() {
@@ -319,7 +326,7 @@ export default {
         cancelButtonText: "Cancelar",
       }).then((result) => {
         if (result.isConfirmed) {
-          this.cuenta = [];
+          this.limpiarCampos();
           window.Swal.fire(
             "Cuenta vaciada",
             "La cuenta ha sido vaciada exitosamente.",
@@ -378,7 +385,7 @@ export default {
           cancelButtonText: "Cancelar",
         }).then((result) => {
           if (result.isConfirmed) {
-            this.cuenta = [];
+            this.limpiarCampos();
             window.Swal.fire(
               "Cuenta vaciada",
               "La cuenta ha sido vaciada exitosamente.",
