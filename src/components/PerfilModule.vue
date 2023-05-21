@@ -19,16 +19,16 @@
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th>Id</th>
-                                    <th>Descripción</th>
-                                    <th>Acciones</th>
+                                    <th class="col-1    text-center">Id</th>
+                                    <th class="col-9    text-center">Descripción</th>
+                                    <th class="col-2    text-center">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody v-if="perfiles != null">
                                 <tr v-for="(item, index) of perfiles" :key="index">
-                                    <td>{{item.id}}</td>
-                                    <td>{{item.descripcion}}</td>
-                                    <td>
+                                    <td class="col-1    text-center">{{item.id}}</td>
+                                    <td class="col-1    text-center">{{item.descripcion}}</td>
+                                    <td class="col-1    text-center">
                                         <button type="button" class="btn btn-success" @click="btnEditar(1, item.id)">
                                             <i class="bi bi-pencil-fill"></i> Editar
                                         </button>

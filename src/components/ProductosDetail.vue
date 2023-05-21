@@ -168,7 +168,7 @@
           });
       },
       getProductoIdData() {
-        if (this.producto !== null) {
+        if (this.producto != null) {
           const urlQuery = `http://localhost:3000/productos/${this.producto}`;
           axios.get(urlQuery)
             .then((response) => {

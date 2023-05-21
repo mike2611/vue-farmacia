@@ -84,7 +84,7 @@ export default {
         // PARA MODIFICAR //
         getPerfilIdData(){
             if (this.perfil != null) {
-                let urlQuery    = `http://localhost:3000/perfiles/${this.perfil}`;            
+                let urlQuery    = `http://localhost:3000/perfiles/${this.perfil}`;
                 axios.get(urlQuery).then((response) => {
                     console.log(response.data);
                     let arrayData   = response.data;

@@ -18,22 +18,22 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>Id</th>
-                                <th>Raz&oacute;n Social</th>
-                                <th>RFC</th>
-                                <th>Tel&eacute;fono</th>
-                                <th>Correo</th>
-                                <th>Acciones</th>
+                                <th class="col-1    text-center">Id</th>
+                                <th class="col-3    text-center">Raz&oacute;n Social</th>
+                                <th class="col-2    text-center">RFC</th>
+                                <th class="col-1    text-center">Tel&eacute;fono</th>
+                                <th class="col-3    text-center">Correo</th>
+                                <th class="col-2    text-center">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-for="(item, index) of proveedores" :key="index">
-                                <td>{{item.id}}</td>
-                                <td>{{item.razon_social}}</td>
-                                <td>{{item.rfc}}</td>
-                                <td>{{item.telefono}}</td>
-                                <td>{{item.correo}}</td>
-                                <td>
+                                <td class="col-1    text-center">{{item.id}}</td>
+                                <td class="col-3    text-center">{{item.razon_social}}</td>
+                                <td class="col-2    text-center">{{item.rfc}}</td>
+                                <td class="col-1    text-center">{{item.telefono}}</td>
+                                <td class="col-3    text-center">{{item.correo}}</td>
+                                <td class="col-2    text-center">
                                     <button type="button" class="btn btn-success" @click="btnEditar(1, item.id)">
                                         <i class="bi bi-pencil-fill"></i> Editar
                                     </button>
