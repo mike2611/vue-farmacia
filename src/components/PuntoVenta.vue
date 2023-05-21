@@ -94,7 +94,7 @@
                     <div class="d-flex">
                       <ul class="list-group m-3">
                         <li
-                          v-for="{producto, index} in cuenta"
+                          v-for="(producto, index) in cuenta"
                           :key="`nombre-${index}`"
                           class="list-group-item"
                         >
@@ -104,7 +104,7 @@
                       </ul>
                       <ul class="list-group m-3">
                         <li
-                          v-for="{producto, index} in cuenta"
+                          v-for="(producto, index) in cuenta"
                           :key="`cantidad-${index}`" 
                           class="list-group-item"
                           role="button"
@@ -115,7 +115,7 @@
                       </ul>
                       <ul class="list-group m-3">
                         <li
-                          v-for="{producto, index} in cuenta"
+                          v-for="(producto, index) in cuenta"
                           :key="`subtotal-${index}`"
                           class="list-group-item"
                           role="button"
@@ -363,12 +363,12 @@ export default {
         )
       })
       .catch(error => {
-        console.error(error);
+        console.log(error);
         window.Swal.fire(
-          "Venta Registrada",
-          "La venta se ha registrado exitosamente.",
-          "succes"
-      );
+          "Error en la Venta",
+           error.response.data.error,
+        );
+        this.cuenta = [];
       })
     }
   },
