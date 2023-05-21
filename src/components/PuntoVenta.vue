@@ -355,10 +355,12 @@ export default {
         }
       });
 
+      const datosUsuario = JSON.parse(localStorage.getItem('datosUsuario'))
+      const idUsuario = datosUsuario.idUsuario;
 
       //Se crea el objeto venta
       const venta = {
-        id_empleado: window.localStorage.getItem('idUsuario'), //Se obtiene el id del ususario del localStorage
+        id_empleado: idUsuario,
         fecha_venta: fechaVenta,
         productos: productos
       }
