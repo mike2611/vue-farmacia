@@ -34,10 +34,10 @@
                                 <td class="col-2    text-center">{{item.inicio}}</td>
                                 <td class="col-2    text-center">{{item.vigencia}}</td>
                                 <td class="col-3    text-center">
-                                    <button type="button" class="btn btn-success" @click="btnEditar(1, item.id)">
+                                    <button type="button" class="btn btn-success btn-block" @click="btnEditar(1, item.id)">
                                         <i class="bi bi-pencil-fill"></i> Editar
                                     </button>
-                                    <button type="button" class="btn btn-danger" @click="btnEliminar(item.id)">
+                                    <button type="button" class="btn btn-danger btn-block" @click="btnEliminar(item.id)">
                                         <i class="bi bi-trash-fill"></i> Eliminar
                                     </button>
                                 </td>
