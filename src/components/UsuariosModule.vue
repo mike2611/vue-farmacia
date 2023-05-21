@@ -20,20 +20,20 @@
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th>Id</th>
-                                    <th>Nombre</th>
-                                    <th>Perfil</th>
-                                    <th>Usuario</th>
-                                    <th>Acciones</th>
+                                    <th class="col-1 text-center">Id</th>
+                                    <th class="col-4 text-center">Nombre</th>
+                                    <th class="col-2 text-center">Perfil</th>
+                                    <th class="col-2 text-center">Usuario</th>
+                                    <th class="col-3 text-center">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody v-if="empleados != null">
                                 <tr v-for="(item, index) of empleados" :key="index">
-                                    <td>{{item.id}}</td>
-                                    <td>{{item.nombre}} {{item.paterno }} {{item.materno}}</td>
-                                    <td>{{item.perfil}}</td>
-                                    <td>{{item.usuario}}</td>
-                                    <td>
+                                    <td class="col-1 text-center">{{item.id}}</td>
+                                    <td class="col-4 text-center">{{item.nombre}} {{item.paterno }} {{item.materno}}</td>
+                                    <td class="col-2 text-center">{{item.perfil}}</td>
+                                    <td class="col-2 text-center">{{item.usuario}}</td>
+                                    <td class="col-3 text-center">
                                         <button type="button" class="btn btn-success" @click="btnEditar(1, item.id)">
                                             <i class="bi bi-pencil-fill"></i> Editar
                                         </button>

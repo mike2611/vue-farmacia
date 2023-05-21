@@ -19,20 +19,20 @@
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th>Id</th>
-                                    <th>Empleado</th>
-                                    <th>Fecha de Venta</th>
-                                    <th>Total de Venta</th>
-                                    <th>Acciones</th>
+                                    <th class="col-1 text-center">Id</th>
+                                    <th class="col-4 text-center">Empleado</th>
+                                    <th class="col-3 text-center">Fecha de Venta</th>
+                                    <th class="col-2 text-center">Total de Venta</th>
+                                    <th class="col-2 text-center">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody v-if="ventas != null">
                                 <tr v-for="(item, index) of ventas" :key="index">
-                                    <td>{{item.id}}</td>
-                                    <td>{{item.empleado}}</td>
-                                    <td>{{item.venta}}</td>
-                                    <td>$ {{returnMoney(item.total)}}</td>
-                                    <td>
+                                    <td class="col-1 text-center">{{item.id}}</td>
+                                    <td class="col-4 text-center">{{item.empleado}}</td>
+                                    <td class="col-3 text-center">{{item.venta}}</td>
+                                    <td class="col-2 text-center">$ {{returnMoney(item.total)}}</td>
+                                    <td class="col-2 text-center">
                                         <button type="button" class="btn btn-success" @click="btnEditar(1, item.id)">
                                             <i class="bi bi-view-list"></i> Ver
                                         </button>
