@@ -35,6 +35,7 @@
                       :class="{ active: selectedProductIndex === index }"
                       @click="selectProduct(producto, index)"
                     >
+                    <small class="stock">{{ producto.stock }}  </small>
                       {{ producto.nombre }}
                       <small>{{ producto.descripcion }}</small>
                     </li>
@@ -51,6 +52,7 @@
                       >
                         {{ producto.nombre }}
                         <small>{{ producto.descripcion }}</small>
+                        <small>{{ producto.stock }}</small>
                       </li>
                     </ul>
                   </div>
@@ -303,6 +305,7 @@ export default {
 
       pdfMake.createPdf(docDefinition).open();
       this.cuenta = [];
+      this.fetchProductos();
     },
     vaciarCuenta() {
       window.Swal.fire({
@@ -364,11 +367,27 @@ export default {
       })
       .catch(error => {
         console.log(error);
-        window.Swal.fire(
-          "Error en la Venta",
-           error.response.data.error,
-        );
-        this.cuenta = [];
+        window.Swal.fire({
+          title: error.response.data.error,
+          text: "¿Deseas vaciar la cuenta?",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Aceptar",
+          cancelButtonText: "Cancelar",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.cuenta = [];
+            window.Swal.fire(
+              "Cuenta vaciada",
+              "La cuenta ha sido vaciada exitosamente.",
+              "success"
+            );
+          } else {
+            window.Swal.fire("Operación cancelada");
+          }
+       });        
       })
     }
   },
@@ -388,5 +407,8 @@ export default {
 }
 .list-wrapper {
   max-height: 270px;
+}
+.stock {
+  font-weight: bolder;
 }
 </style>
