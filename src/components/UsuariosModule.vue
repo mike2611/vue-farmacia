@@ -95,8 +95,7 @@ export default {
                 console.log(empleados);
             });
         },
-        btnEliminar(idEmpleado){
-            
+        btnEliminar(idProveedor){
             window.Swal.fire({
                 title: "¿Estás seguro?",
                 text: "¿Deseas eliminar este empleado?",
@@ -108,11 +107,14 @@ export default {
                 cancelButtonText: "Cancelar",
             }).then((result) => {
                 if (result.isConfirmed) {
-                    axios.delete(`http://localhost:3000/empleados/${idEmpleado}`).then((response) => {
-                        let confirm = response.data;
-                        console.log(confirm);
+                    const ObjectData = {
+                        estatus : 0,
+                    };
+                    axios.put(`http://localhost:3000/empleados/${idProveedor}`, ObjectData).then((response) => {
+                        console.log(response.data);
                         this.getData();
                     });
+
                     window.Swal.fire(
                         "Empleado Eliminado",
                         "El empleado ha sido eliminado correctamente.",

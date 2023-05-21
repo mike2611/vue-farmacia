@@ -146,7 +146,8 @@ export default {
                 materno     : materno,
                 edad        : edad,
                 usuario     : usuario,
-                clave       : clave
+                clave       : clave,
+                estatus     : 1
             }
 
             try {
