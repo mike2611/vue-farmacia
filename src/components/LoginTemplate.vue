@@ -4,6 +4,11 @@
         <div class="row justify-content-center">
     
             <div class="col-xl-10 col-lg-12 col-md-9">
+
+                <div class="containerHeader">
+                    <h1 class="loginHeader">FarmaFácil</h1>
+                    <img class="loginLogo" src="../assets/img/farmaLogo2.png" alt="">
+                </div>
     
                 <div class="card o-hidden border-0 shadow-lg my-5">
                     <div class="card-body p-0">
@@ -130,3 +135,23 @@
         },
     };
 </script>
+
+<style>
+    .containerHeader {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        margin-top: 20px;
+        margin-bottom: 100px;
+    }
+    .loginHeader {
+        color: whitesmoke;
+        font-weight: bolder;
+        font-size: 5rem;
+        margin-right: 10px;
+    }
+    .loginLogo {
+        height: 100px;
+        width: auto;
+    }
+</style>
