@@ -90,38 +90,40 @@
                       ? "Cuenta Actual:"
                       : "Aún no has agregado ningún producto a tu cuenta" }}</span
                   >
-                  <div class="d-flex">
-                    <ul class="list-group m-3">
-                      <li
-                        v-for="producto in cuenta"
-                        :key="`nombre-${producto.id}`"
-                        class="list-group-item"
-                      >
-                        {{ producto.nombre }}
-                        <small> {{ producto.descripcion }}</small>
-                      </li>
-                    </ul>
-                    <ul class="list-group m-3">
-                      <li
-                        v-for="producto in cuenta"
-                        :key="`cantidad-${producto.id}`" 
-                        class="list-group-item"
-                        role="button"
-                      >
-                        {{ producto.cantidad }} unidad(es) X
-                        {{ producto.precio_venta | formatoMoneda }}
-                      </li>
-                    </ul>
-                    <ul class="list-group m-3">
-                      <li
-                        v-for="producto in cuenta"
-                        :key="`subtotal-${producto.id}`"
-                        class="list-group-item"
-                        role="button"
-                      >
-                        {{ producto.cantidad * producto.precio_venta | formatoMoneda }}
-                      </li>
-                    </ul>
+                  <div style="height: 250px; overflow: auto;">
+                    <div class="d-flex">
+                      <ul class="list-group m-3">
+                        <li
+                          v-for="producto in cuenta"
+                          :key="`nombre-${producto.id}`"
+                          class="list-group-item"
+                        >
+                          {{ producto.nombre }}
+                          <small> {{ producto.descripcion }}</small>
+                        </li>
+                      </ul>
+                      <ul class="list-group m-3">
+                        <li
+                          v-for="producto in cuenta"
+                          :key="`cantidad-${producto.id}`" 
+                          class="list-group-item"
+                          role="button"
+                        >
+                          {{ producto.cantidad }} unidad(es) X
+                          {{ producto.precio_venta | formatoMoneda }}
+                        </li>
+                      </ul>
+                      <ul class="list-group m-3">
+                        <li
+                          v-for="producto in cuenta"
+                          :key="`subtotal-${producto.id}`"
+                          class="list-group-item"
+                          role="button"
+                        >
+                          {{ producto.cantidad * producto.precio_venta | formatoMoneda }}
+                        </li>
+                      </ul>
+                    </div>
                   </div>
                   <div v-if="cuenta.length > 0">
                     <div class="d-flex flex-row justify-content-end m-3">
