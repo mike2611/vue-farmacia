@@ -29,7 +29,7 @@
                   <ul class="list-group m-3" v-if="productosFiltrados.length <= 5">
                     <li
                       v-for="(producto, index) in productosFiltrados"
-                      :key="producto.id"
+                      :key="`producto-${producto.id}`"
                       class="list-group-item"
                       role="button"
                       :class="{ active: selectedProductIndex === index }"
@@ -43,7 +43,7 @@
                     <ul class="list-group m-3">
                       <li
                         v-for="(producto, index) in productosFiltrados"
-                        :key="`producto-${producto.id}`"
+                        :key="`productoScroll-${producto.id}`"
                         class="list-group-item"
                         role="button"
                         :class="{ active: selectedProductIndex === index }"
@@ -94,8 +94,8 @@
                     <div class="d-flex">
                       <ul class="list-group m-3">
                         <li
-                          v-for="producto in cuenta"
-                          :key="`nombre-${producto.id}`"
+                          v-for="{producto, index} in cuenta"
+                          :key="`nombre-${index}`"
                           class="list-group-item"
                         >
                           {{ producto.nombre }}
@@ -104,8 +104,8 @@
                       </ul>
                       <ul class="list-group m-3">
                         <li
-                          v-for="producto in cuenta"
-                          :key="`cantidad-${producto.id}`" 
+                          v-for="{producto, index} in cuenta"
+                          :key="`cantidad-${index}`" 
                           class="list-group-item"
                           role="button"
                         >
@@ -115,8 +115,8 @@
                       </ul>
                       <ul class="list-group m-3">
                         <li
-                          v-for="producto in cuenta"
-                          :key="`subtotal-${producto.id}`"
+                          v-for="{producto, index} in cuenta"
+                          :key="`subtotal-${index}`"
                           class="list-group-item"
                           role="button"
                         >
@@ -167,24 +167,6 @@
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Abandonar sesión</h5>
-            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-          <div class="modal-body">Si tienes una venta en proceso, se perderá si sales.</div>
-          <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-            <a class="btn btn-primary" href="login.html">Salir</a>
           </div>
         </div>
       </div>
@@ -359,6 +341,8 @@ export default {
 
       const datosUsuario = JSON.parse(localStorage.getItem('datosUsuario'))
       const idUsuario = datosUsuario.idUsuario;
+
+      console.log(idUsuario)
 
       //Se crea el objeto venta
       const venta = {
