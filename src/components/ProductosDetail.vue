@@ -18,7 +18,7 @@
                 <label>Contrato Asociado:</label>
                 <select id="cboContrato" class="form-control" v-model="selectedContrato">
                   <option value="0">SELECCIONAR</option>
-                  <option v-for="(item, index) of contratos" :key="index" :value="item.id">{{ item.id }}</option>
+                  <option v-for="(item, index) of contratos" :key="index" :value="item.id">{{ item.descripcion }}</option>
                 </select>
               </div>
             </div>
