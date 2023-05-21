@@ -355,9 +355,10 @@ export default {
         }
       });
 
+
       //Se crea el objeto venta
       const venta = {
-        id_empleado: 1, //TODO: Por el momento el id se mantiene como 1 porque no se tiene login ni se lleva registro del empleado actual en la sesion
+        id_empleado: window.localStorage.getItem('idUsuario'), //Se obtiene el id del ususario del localStorage
         fecha_venta: fechaVenta,
         productos: productos
       }
