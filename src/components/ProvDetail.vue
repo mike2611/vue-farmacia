@@ -16,28 +16,28 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="inputEmail4">Proveedor:</label>
-                            <input type="text" class="form-control" id="txtProveedor"/>
+                            <input type="text" class="form-control" id="txtProveedor" v-model="txtProveedor" />
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group col-md-12">
                             <label for="inputEmail4">RFC:</label>
-                            <input type="text" class="form-control" id="txtRFC" maxlength="13"/>
+                            <input type="text" class="form-control" id="txtRFC" v-model="txtRFC" maxlength="13"/>
                         </div>                        
                     </div>
 
                     <div class="form-row">
                         <div class="form-group col-md-12">
                             <label for="inputEmail4">Razón Social:</label>
-                            <input type="text" class="form-control" id="txtRazonSocial"/>
+                            <input type="text" class="form-control" id="txtRazonSocial" v-model="txtRazonSocial"/>
                         </div>                        
                     </div>
                     <!-- DIRECCION -->
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="inputPassword4">Calle:</label>
-                            <input type="text" class="form-control" id="txtCalle"/>
+                            <input type="text" class="form-control" id="txtCalle" v-model="txtCalle"/>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputPassword4">Número/Exterior:</label>
@@ -52,6 +52,7 @@
                                     <input  type="text"
                                             class="form-control"
                                             id="txtExterior"
+                                            v-model="txtExterior"
                                             maxlength="1"/>
                                 </div>
                             </div>
@@ -61,14 +62,14 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="inputPassword4">Colonia:</label>
-                            <input type="text" class="form-control" id="txtColonia"/>
+                            <input type="text" class="form-control" id="txtColonia" v-model="txtColonia"/>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="inputPassword4">Código Postal:</label>
                             <input  type="text"
                                     class="form-control"
                                     id="txtCP"
-                                    v-model="numericInput" @input="filterNonNumeric"
+                                    v-model="txtCP" @input="filterNonNumeric"
                                     maxlength="5"/>
                         </div>
                     </div>
@@ -76,14 +77,14 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="inputPassword4">País:</label>
-                            <select id="cboPais" class="form-control">
+                            <select id="cboPais" v-model="cboPais" class="form-control">
                                 <option value="0" selected>SELECCIONAR</option>
                                 <option v-for="(item, index) of paises" :key="index" :value="item.id" @click="getEstados(item.id)">{{item.nombre}}</option>
                             </select>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="inputPassword4">Estado:</label>
-                            <select id="cboEstado" class="form-control">
+                            <select id="cboEstado" v-model="cboEstado" class="form-control">
                                 <option value="0" selected>SELECCIONAR</option>
                                 <option v-for="(item, index) of estados" :key="index" :value="item.id" @click="getMunicipios(item.id)">{{item.nombre}}</option>
                             </select>
@@ -93,7 +94,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="inputPassword4">Ciudad:</label>
-                            <select id="cboCiudad" class="form-control">
+                            <select id="cboCiudad" v-model="cboCiudad" class="form-control">
                                 <option value="0" selected>SELECCIONAR</option>
                                 <option v-for="(item, index) of municipios" :key="index" :value="item.id">{{item.nombre}}</option>
                             </select>
@@ -115,6 +116,7 @@
                             <label for="inputPassword4">Correo:</label>
                             <input  type="text"
                                     class="form-control"
+                                    v-model="txtCorreo"
                                     id="txtCorreo"/>
                         </div>
                     </div>
@@ -145,16 +147,26 @@ export default {
     props: ['Detailview', 'proveedor'],
     data(){
         return{
-            numericInput: "",
-            txtNumero   : "",
-            txtTelefono : "",
-            placeholders: [],
-            paises      : [],
-            pais        : null,
-            estados     : [],
-            estado      : null,
-            municipios  : [],
-            municipio   : null
+            txtCP           : "",
+            txtNumero       : "",
+            txtExterior     : "",
+            txtTelefono     : "",
+            txtProveedor    : "",
+            txtRazonSocial  : "",
+            txtRFC          : "",
+            txtColonia      : "",
+            txtCalle        : "",
+            txtCorreo       : "",
+            cboPais         : 0,
+            cboEstado       : 0,
+            cboCiudad       : 0,
+            placeholders    : [],
+            paises          : [],
+            pais            : null,
+            estados         : [],
+            estado          : null,
+            municipios      : [],
+            municipio       : null
         }
     },
 
@@ -165,7 +177,7 @@ export default {
     methods:{
         // VALIDACIONES EN INPUTS NUM //
         filterNonNumeric() {
-            this.numericInput   = this.numericInput.replace(/[^0-9]/g, "");
+            this.txtCP          = this.txtCP.replace(/[^0-9]/g, "");
         },
         noNumericExt() {
             this.txtNumero      = this.txtNumero.replace(/[^0-9]/g, "");
@@ -203,6 +215,7 @@ export default {
             });
         },
         getMunicipios(idEstado){
+            console.log({idEstado});
             axios.get('http://localhost:3000/municipios/' + idEstado).then((response) => {
                 this.municipios = [];
                 let arrayData   = response.data;
@@ -307,39 +320,36 @@ export default {
         },
 
         // PARA MODIFICAR //
-        getUserIdData(){
+        getUserIdData() {
             if (this.proveedor != null) {
-                let urlQuery    = `http://localhost:3000/proveedores/${this.proveedor}`;
+                let urlQuery = `http://localhost:3000/proveedores/${this.proveedor}`;
                 axios.get(urlQuery).then((response) => {
+                    let arrayData = response.data;
+                    let data = arrayData[0]; // Supongo que solo obtienes un proveedor en la respuesta
 
-                    let arrayData   = response.data;
-
-                    for (const key in arrayData) { 
-                        document.getElementById("txtProveedor").value       = arrayData[key].nombre;
-                        document.getElementById("txtRazonSocial").value     = arrayData[key].razon_social;
-                        document.getElementById("txtRFC").value             = arrayData[key].rfc;
-                        document.getElementById("txtColonia").value         = arrayData[key].colonia;
-                        document.getElementById("txtCalle").value           = arrayData[key].calle;
-                        document.getElementById("txtExterior").value        = arrayData[key].num_ext;
-                        document.getElementById("txtCorreo").value          = arrayData[key].correo;
-                        document.getElementById("cboPais").value            = arrayData[key].id_pais;
-
-                        this.pais       = arrayData[key].id_pais;
-                        this.estado     = arrayData[key].id_estado;
-                        this.municipio  = arrayData[key].id_municipio;
-
-                        this.getEstados(arrayData[key].id_pais);
-                        this.getMunicipios(arrayData[key].id_estado);
-
-                        setTimeout(() => {
-                            document.getElementById("txtNumero").value          = arrayData[key].num_int;
-                            document.getElementById("txtTelefono").value        = arrayData[key].telefono;
-                            document.getElementById("txtCP").value              = arrayData[key].cod_p;
-                        }, 200);
-                    }
+                    // Asignar los valores a las propiedades de datos del componente
+                    this.txtProveedor   = data.nombre;
+                    this.txtRazonSocial = data.razon_social;
+                    this.txtRFC         = data.rfc;
+                    this.txtColonia     = data.colonia;
+                    this.txtCalle       = data.calle;
+                    this.txtExterior    = data.num_ext;
+                    this.txtCorreo      = data.correo;
+                    this.cboPais        = data.id_pais;
+                    this.cboEstado      = data.id_estado;
+                    this.getEstados(data.id_pais);
+                    this.txtNumero      = data.num_int;
+                    this.txtTelefono    = data.telefono;
+                    this.txtCP          = data.cod_p;
+                    this.getMunicipios(data.id_estado);
+                    // Esperar un breve momento para que se carguen los datos
+                    setTimeout(() => {
+                        this.cboCiudad  = data.id_municipio;
+                    }, 300);
                 });
             }
         },
+
 
         async fnModificar() {
             let nombre      = document.getElementById("txtProveedor").value;

@@ -93,6 +93,9 @@ export default {
             });
         },
         btnEliminar(idProveedor){
+            const ObjectData = {
+                estatus : 0,
+            };
             window.Swal.fire({
                 title: "¿Estás seguro?",
                 text: "¿Deseas eliminar este proveedor?",
@@ -104,7 +107,7 @@ export default {
                 cancelButtonText: "Cancelar",
             }).then((result) => {
                 if (result.isConfirmed) {
-                    axios.delete(`http://localhost:3000/proveedores/${idProveedor}`).then((response) => {
+                    axios.put('http://localhost:3000/proveedores/' + idProveedor, ObjectData).then((response) => {
                         console.log(response.data);
                         this.getData();
                     });
