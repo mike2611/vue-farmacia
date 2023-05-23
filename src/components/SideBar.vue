@@ -36,6 +36,7 @@
                     <a class="collapse-item small-font" href="#" @click="pruebaTemplate(3)">Contratos</a>
                     <a class="collapse-item small-font" href="#" @click="pruebaTemplate(4)">Proveedores</a>
                     <a class="collapse-item small-font" href="#" @click="pruebaTemplate(6)">Productos</a>
+                    <a class="collapse-item small-font" href="#" @click="pruebaTemplate(8)">Registros</a>
                 </div>
             </div>
         </li>

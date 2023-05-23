@@ -40,6 +40,7 @@
                     <ContModule         v-if="mainView == 3"></ContModule>
                     <ProvModule         v-if="mainView == 4"></ProvModule>
                     <ProductosModule    v-if="mainView == 6"></ProductosModule>
+                    <RegistrosAdmin     v-if="mainView == 8"></RegistrosAdmin>
                     <!-- PUNTO DE VENTAS DROPDOWN -->
                     <puntoVenta         v-if="mainView == 5"></puntoVenta>
                     <historicoVenta     v-if="mainView == 7"></historicoVenta>
@@ -66,6 +67,7 @@ import PerfilModule from "./PerfilModule.vue";
 import ContModule from "./ContratosModule.vue";
 import ProvModule from "./ProvModule.vue";
 import ProductosModule from "./ProductosModule.vue";
+import RegistrosAdmin from "./RegistrosAdmin.vue";
 // MANU DE PUNTO DE VENTA //
 import puntoVenta from "./PuntoVenta.vue";
 import historicoVenta from "./historicoVenta.vue";
@@ -86,21 +88,22 @@ export default {
         this.getPerfilData();
     },
     components: {
-        // TEMPLATE LOGGED
-        SideBar,
-        TopBar,
-        CustomFooter,
-        // ADMIN
-        notFound,
-        UserModule,
-        PerfilModule,
-        ContModule,
-        ProvModule,
-        ProductosModule,
-        // PUNTO DE VENTA
-        puntoVenta,
-        historicoVenta
-    },
+    // TEMPLATE LOGGED
+    SideBar,
+    TopBar,
+    CustomFooter,
+    // ADMIN
+    notFound,
+    UserModule,
+    PerfilModule,
+    ContModule,
+    ProvModule,
+    ProductosModule,
+    RegistrosAdmin,
+    // PUNTO DE VENTA
+    puntoVenta,
+    historicoVenta,
+},
 
     methods:{
         changeView(templateInt){ this.mainView = templateInt; },

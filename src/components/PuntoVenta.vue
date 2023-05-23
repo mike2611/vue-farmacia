@@ -285,11 +285,11 @@ export default {
       const docDefinition = {
         content: [
           // Encabezado del ticket
-          { text: 'FarmaFacil', style: 'header' },
+          { text: 'FarmaFácil', style: 'header' },
           { text: 'RFC: FLY960905M2M', style: 'header' },
           { text: 'Direccion : Ahuejote 493 No. S/N, Pedregal De Santo Domingo, 04369', style: 'subheader ' },
           { text: 'Fecha: ' + new Date().toLocaleDateString(), style: 'subheader' },
-          { text: ' ', style: 'subheader' },
+          { text: ``, style: 'subheader' },
 
           // Contenido de los productos en la cuenta
           { text: 'Cuenta Actual:', style: 'subheader' },
@@ -297,7 +297,7 @@ export default {
           { text: ' ', style: 'subheader' },
 
           // Totales
-          { text: 'Totales:', style: 'subheader' },
+          { text: 'Totales:', style: 'total' },
           { text: `SubTotal: $ ${this.subtotal}`, style: 'total' },
           { text: `Descuento(s): $ ${this.descuentos}`, style: 'total' },
           { text: `IVA: $ ${this.iva}`, style: 'total' },
@@ -306,7 +306,7 @@ export default {
         styles: {
           header: { fontSize: 18, bold: true, alignment: 'center' },
           subheader: { fontSize: 14, bold: true, margin: [0, 0, 0, 10] },
-          total: { fontSize: 12, bold: true, margin: [0, 0, 0, 5] },
+          total: { fontSize: 12, bold: true, margin: [400, 0, 0, 5] },
         },
       };
 
