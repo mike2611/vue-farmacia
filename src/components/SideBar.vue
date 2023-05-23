@@ -118,6 +118,3 @@ export default {
         font-weight: 900;
     } */
 </style>
-
-<!-- <style scoped>
-</style> -->
