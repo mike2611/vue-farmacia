@@ -9,8 +9,11 @@
 
 ## Pre requisitos
 
-- Navegador
-- Node.js instalado
+- Navegador Web (se confirma el correcto funcionamiento del sistema en navegadores basados en Chromium)
+- Node.js instalado v18
+  - Para la instalación de Node.js en su sistema se hace la recomendación de usar nvm (Node Version Manager) 
+    - Use el siguiente comando en su terminal para la instalación en los sistemas (Ubuntu, Debian y CentOS) curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+    - Para la instalación en Windows vea este manual con las instrucciones detalladas https://4geeks.com/how-to/nvm-install-windows
 
 
 ## Correr Aplicación
