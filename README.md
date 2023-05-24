@@ -1,4 +1,4 @@
-# FarmaFácil
+# FarmaFácil(FrontEnd)
 
 > Este es el front del proyecto para fármacia de la clase bases de datos y lenguajes
 
